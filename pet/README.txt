@@ -29,6 +29,15 @@ https://lumina-falster.github.io/boluo-island/
 Win + R 输入 shell:startup 回车，
 把桌面的「菠萝岛桌宠」快捷方式复制一份进去。
 
+【更换桌宠形象 / 图标】
+形象：出一张透明背景 PNG（竖版，建议 570x1020 以上；显示区域 76x136 等比缩放，
+     方形图会自动居中缩小）。命名 pet.png 放到本文件夹，重启即生效。
+     表情小脸会叠在新形象上；如果你的图自带表情，用记事本打开 pet_config.json
+     加入一行 "hideFace": true 即可隐藏小脸。
+图标：出一张 256x256 的 .ico（PNG 可在 icoconvert.com 等网站在线转换），
+     命名 pineapple.ico 覆盖本文件夹同名文件，重启桌宠。
+     桌面快捷方式图标若没刷新：删掉快捷方式，重启桌宠会自动重建。
+
 【被 Windows 拦截了？】
 提示"已保护你的电脑"时：点「更多信息」→「仍要运行」。
 或右键 START_PET.bat → 属性 → 勾选「解除锁定」→ 确定。
