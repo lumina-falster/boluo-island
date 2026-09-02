@@ -27,6 +27,23 @@ if (Test-Path $StateFile) {
 function Save-Cfg { $cfg | ConvertTo-Json | Out-File -FilePath $CfgFile -Encoding utf8 }
 function NowMs { [double][DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() }
 
+function Ensure-Shortcut {
+    try {
+        $desktop = [Environment]::GetFolderPath('Desktop')
+        $lnk = Join-Path $desktop '菠萝岛桌宠.lnk'
+        if (Test-Path $lnk) { return }
+        $ws = New-Object -ComObject WScript.Shell
+        $s = $ws.CreateShortcut($lnk)
+        $s.TargetPath = 'powershell.exe'
+        $s.Arguments = '-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "{0}"' -f $PSCommandPath
+        $ico = Join-Path $Base 'pineapple.ico'
+        if (Test-Path $ico) { $s.IconLocation = $ico }
+        $s.WorkingDirectory = $Base
+        $s.Description = '菠萝岛果实助手桌宠'
+        $s.Save()
+    } catch {}
+}
+
 function Format-Left([double]$ms) {
     if ($ms -le 0) { return '已成熟' }
     $s = [int][math]::Floor($ms / 1000)
@@ -269,6 +286,8 @@ if ($cfg.ContainsKey('left') -and $cfg['left']) {
     $window.Left = $wa.Right - 195
     $window.Top = $wa.Bottom - 232
 }
+
+if (-not $SelfTest) { Ensure-Shortcut }
 
 if ($SelfTest) {
     $script:plots = @(
