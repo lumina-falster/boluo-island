@@ -1,0 +1,37 @@
+name: 菠萝岛成熟提醒
+
+on:
+  schedule:
+    # 每 5 分钟检查一次（GitHub 高峰期可能有几分钟延迟，属正常现象）
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "发送测试通知"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: notify
+  cancel-in-progress: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 检查并发送提醒
+        env:
+          SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
+          WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          TEST_MODE: ${{ inputs.test || 'false' }}
+        run: python scripts/notify.py
