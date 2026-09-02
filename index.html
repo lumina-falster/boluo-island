@@ -107,6 +107,8 @@ header{position:sticky;top:0;z-index:20;color:#fff;padding:calc(10px + env(safe-
 .chips{display:flex;flex-wrap:wrap;gap:7px}
 .chip{padding:6px 13px;border-radius:999px;border:1px solid #e3dcc7;background:#fbf9f2;font-size:13px;color:#5f594b}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.chip .dur{font-size:10px;opacity:.65;margin-left:5px;font-weight:400}
+.chip.on .dur{opacity:.9}
 input[type=text],input[type=number],input[type=password],input[type=datetime-local],select{
   width:100%;padding:10px 12px;border:1.5px solid #e3dcc7;border-radius:11px;background:#fbf9f2;outline:none}
 input:focus{border-color:var(--acc);background:#fff}
@@ -188,13 +190,14 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
 <div class="sheet" id="sheetPlot">
   <div class="grab"></div>
   <h3 id="plotTitle">种植果实</h3>
-  <div class="sub">照着游戏里显示的剩余时间填，成熟时刻自动计算</div>
+  <div class="sub">刚种下的用「刚种下」模式（按果实时长自动倒计时），被加速后用「按剩余时间」校准</div>
   <div class="frow" id="nameRow"><div class="flabel">地块名称（可改成游戏里的位置叫法）</div><input type="text" id="inName" maxlength="12"></div>
   <div class="frow"><div class="flabel">果实</div><div class="chips" id="fruitChips"></div><input type="text" id="inFruit" class="hidden" placeholder="输入果实名称" maxlength="10"></div>
   <div class="frow"><div class="flabel">肥料（部分肥料会影响成熟时间）</div><div class="chips" id="fertChips"></div><input type="text" id="inFert" class="hidden" placeholder="输入肥料名称" maxlength="12"></div>
   <div class="tabs">
-    <button class="tab on" id="tabRemain" data-mode="remain">按剩余时间录入</button>
-    <button class="tab" id="tabPlan" data-mode="plan">按种植时间推算</button>
+    <button class="tab on" id="tabRemain">按剩余时间</button>
+    <button class="tab" id="tabFresh">刚种下</button>
+    <button class="tab" id="tabPlan">补录推算</button>
   </div>
   <div id="boxRemain">
     <div class="frow"><div class="flabel">游戏里显示的剩余时间</div>
@@ -204,9 +207,10 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
   </div>
   <div id="boxPlan" class="hidden">
     <div class="frow"><div class="flabel">种植时间</div><input type="datetime-local" id="inPlanted"></div>
-    <div class="frow"><div class="flabel">成熟时长（可按肥料效果自行调整）</div>
+  </div>
+  <div class="frow hidden" id="durRow">
+    <div class="flabel">成熟时长（已按果实自动填入，肥料有加速效果可手动改）</div>
       <div class="trow"><input type="number" id="inDurH" min="0" max="999" inputmode="numeric" placeholder="时"><span class="tunit">小时</span><input type="number" id="inDurM" min="0" max="59" inputmode="numeric" placeholder="分"><span class="tunit">分钟</span></div>
-    </div>
   </div>
   <div class="frow" id="noteRow" style="margin-top:13px"><div class="flabel">备注（可选）</div><input type="text" id="inNote" maxlength="30" placeholder="例如：留着做杂交"></div>
   <div class="btnrow">
@@ -270,10 +274,11 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
 /* ================= 常量与状态 ================= */
 const API='https://api.github.com';
 const ROWS=8,COLS=8;
-const FRUITS=['菠萝','凤梨','西瓜','南瓜','萝卜','桃子','草莓','玉米','神秘种子'];
+const FRUITS=['杨桃','榴莲','柠檬','香蕉','石榴','草莓','山竹','火龙果','牛油果'];
+const FRUIT_MIN={'杨桃':60,'榴莲':60,'柠檬':15,'香蕉':15,'石榴':15,'草莓':15,'山竹':960,'火龙果':960,'牛油果':960};
 const FERTS=['无','重量化肥','变异化肥','促熟化肥'];
-const EMOJI={'菠萝':'🍍','凤梨':'🍍','西瓜':'🍉','南瓜':'🎃','萝卜':'🥕','桃子':'🍑','草莓':'🍓','玉米':'🌽','神秘种子':'❓'};
-const QUICK=[[0,30,'30分钟'],[1,0,'1小时'],[2,0,'2小时'],[4,0,'4小时'],[8,0,'8小时'],[12,0,'12小时'],[24,0,'24小时']];
+const EMOJI={'杨桃':'⭐','榴莲':'🍈','柠檬':'🍋','香蕉':'🍌','石榴':'🍎','草莓':'🍓','山竹':'🍇','火龙果':'🐉','牛油果':'🥑'};
+const QUICK=[[0,15,'15分钟'],[1,0,'1小时'],[2,0,'2小时'],[4,0,'4小时'],[16,0,'16小时'],[24,0,'24小时']];
 const LS_CFG='boluo_cfg',LS_DATA='boluo_data';
 let cfg={};try{cfg=JSON.parse(localStorage.getItem(LS_CFG)||'{}')}catch(e){cfg={}}
 let data=null;
@@ -521,11 +526,37 @@ function renderChips(box,items,selected,onPick,customInput){
   });
   if(customInput)customInput.classList.toggle('hidden',selected!=='__custom');
 }
+function fmtDur(min){
+  if(min>=1440&&min%1440===0)return(min/1440)+'天';
+  if(min%60===0)return(min/60)+'小时';
+  return min+'分钟';
+}
+function renderFruitChips(){
+  const box=$('#fruitChips');box.innerHTML='';
+  FRUITS.forEach(f=>{
+    const c=document.createElement('button');
+    c.className='chip'+(selFruit===f?' on':'');
+    c.innerHTML=esc(f)+'<span class="dur">'+fmtDur(FRUIT_MIN[f])+'</span>';
+    c.onclick=()=>pickFruit(f);
+    box.appendChild(c);
+  });
+  const cu=document.createElement('button');
+  cu.className='chip'+(selFruit==='__custom'?' on':'');cu.textContent='自定义';
+  cu.onclick=()=>pickFruit('__custom');
+  box.appendChild(cu);
+  $('#inFruit').classList.toggle('hidden',selFruit!=='__custom');
+}
+function setDur(min){$('#inDurH').value=Math.floor(min/60);$('#inDurM').value=min%60}
+function syncDur(){
+  if(timeMode==='remain')return;
+  if(selFruit&&FRUIT_MIN[selFruit])setDur(FRUIT_MIN[selFruit]);
+}
 function pickFruit(v){
   selFruit=v;
-  renderChips($('#fruitChips'),FRUITS,selFruit,pickFruit,$('#inFruit'));
+  renderFruitChips();
   if(v!=='__custom')$('#inFruit').value='';
   else setTimeout(()=>$('#inFruit').focus(),50);
+  syncDur();
 }
 function pickFert(v){
   selFert=v;
@@ -539,15 +570,18 @@ QUICK.forEach(([h,m,label])=>{
   c.onclick=()=>{$('#inRemH').value=h;$('#inRemM').value=m};
   $('#quickChips').appendChild(c);
 });
-[['tabRemain','remain'],['tabPlan','plan']].forEach(([id,m])=>{
+[['tabRemain','remain'],['tabFresh','fresh'],['tabPlan','plan']].forEach(([id,m])=>{
   $('#'+id).onclick=()=>setTab(m);
 });
 function setTab(m){
   timeMode=m;
   $('#tabRemain').classList.toggle('on',m==='remain');
+  $('#tabFresh').classList.toggle('on',m==='fresh');
   $('#tabPlan').classList.toggle('on',m==='plan');
   $('#boxRemain').classList.toggle('hidden',m!=='remain');
   $('#boxPlan').classList.toggle('hidden',m!=='plan');
+  $('#durRow').classList.toggle('hidden',m==='remain');
+  syncDur();
 }
 
 /* ---- 地块录入 sheet（单块/批量通用） ---- */
@@ -564,7 +598,7 @@ function openPlotSheet(ids){
   $('#inName').value=p.name;
   selFruit=FRUITS.includes(p.fruit)?p.fruit:(p.fruit?'__custom':null);
   $('#inFruit').value=selFruit==='__custom'?p.fruit:'';
-  renderChips($('#fruitChips'),FRUITS,selFruit,pickFruit,$('#inFruit'));
+  renderFruitChips();
   selFert=FERTS.includes(p.fertilizer)?p.fertilizer:(p.fertilizer?'__custom':'无');
   $('#inFert').value=selFert==='__custom'?p.fertilizer:'';
   renderChips($('#fertChips'),FERTS,selFert,pickFert,$('#inFert'));
@@ -572,7 +606,7 @@ function openPlotSheet(ids){
   $('#inDurH').value='';$('#inDurM').value='';
   $('#inPlanted').value=toLocalInput(Date.now());
   $('#inNote').value=p.note||'';
-  setTab('remain');
+  setTab(batch||!p.ripenAt?'fresh':'remain');
   openSheet('sheetPlot');
 }
 $('#btnPlotSave').onclick=()=>{
@@ -581,7 +615,7 @@ $('#btnPlotSave').onclick=()=>{
   const fruit=selFruit==='__custom'?$('#inFruit').value.trim():(selFruit||'');
   const fert=selFert==='__custom'?$('#inFert').value.trim():(selFert||'无');
   if(!fruit){toast('请选择或输入果实名称',true);return}
-  let ripenAt=null,plantedBase=null;
+  let ripenAt=null,plantedAt=null;
   if(timeMode==='remain'){
     const h=+$('#inRemH').value||0,m=+$('#inRemM').value||0;
     if(h<=0&&m<=0){toast('请填写游戏里显示的剩余时间',true);return}
@@ -589,15 +623,19 @@ $('#btnPlotSave').onclick=()=>{
   }else{
     const h=+$('#inDurH').value||0,m=+$('#inDurM').value||0;
     if(h<=0&&m<=0){toast('请填写成熟时长',true);return}
-    const pv=$('#inPlanted').value;
-    plantedAt=pv?new Date(pv).getTime():Date.now();
+    if(timeMode==='plan'){
+      const pv=$('#inPlanted').value;
+      plantedAt=pv?new Date(pv).getTime():Date.now();
+    }else{
+      plantedAt=Date.now();
+    }
     ripenAt=plantedAt+h*3600000+m*60000;
   }
   const edited=[];
   for(const id of editIds){
     const p=byId(id);if(!p)continue;
     const upd={fruit,fertilizer:fert||'无',ripenAt,notifiedSoon:false,notifiedRipe:false};
-    upd.plantedAt=timeMode==='plan'?plantedBase:p.plantedAt;
+    upd.plantedAt=timeMode==='remain'?p.plantedAt:plantedAt;
     if(!batch){
       upd.name=$('#inName').value.trim()||p.name;
       upd.note=$('#inNote').value.trim();
