@@ -142,6 +142,34 @@ $Pet = $window.FindName('Pet')
 $PetT = New-Object System.Windows.Media.TranslateTransform
 $Pet.RenderTransform = $PetT
 
+# 自定义皮肤：pet 文件夹存在 pet.png 时自动替换菠萝造型（表情小脸保留）
+$petImgPath = Join-Path $Base 'pet.png'
+if (Test-Path $petImgPath) {
+    try {
+        $bmp = New-Object System.Windows.Media.Imaging.BitmapImage
+        $bmp.BeginInit()
+        $bmp.UriSource = [Uri]::new($petImgPath)
+        $bmp.CacheOption = 'OnLoad'
+        $bmp.EndInit()
+        $img = New-Object System.Windows.Controls.Image
+        $img.Source = $bmp
+        $img.Width = 76; $img.Height = 136
+        $img.Stretch = 'Uniform'
+        [System.Windows.Controls.Canvas]::SetLeft($img, 52)
+        [System.Windows.Controls.Canvas]::SetTop($img, 58)
+        $faces = @($FaceSleep, $FaceGrow, $FaceHot)
+        $Pet.Children.Clear()
+        $null = $Pet.Children.Add($img)
+        foreach ($f in $faces) { $null = $Pet.Children.Add($f) }
+    } catch {}
+}
+$script:hideFace = ($cfg.ContainsKey('hideFace') -and $cfg['hideFace'])
+if ($script:hideFace) {
+    $FaceSleep.Visibility = 'Collapsed'
+    $FaceGrow.Visibility = 'Collapsed'
+    $FaceHot.Visibility = 'Collapsed'
+}
+
 # ---------------- 详情窗口 ----------------
 $xamlD = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -214,9 +242,11 @@ function Update-Tick {
     $mood = if ($ripe) { 'ripe' } elseif ($soon) { 'soon' } elseif ($grow) { 'grow' } else { 'sleep' }
     if ($mood -ne $script:mood) {
         $script:mood = $mood
-        $FaceSleep.Visibility = if ($mood -eq 'sleep') { 'Visible' } else { 'Collapsed' }
-        $FaceGrow.Visibility  = if ($mood -eq 'grow')  { 'Visible' } else { 'Collapsed' }
-        $FaceHot.Visibility   = if ($mood -in 'soon', 'ripe') { 'Visible' } else { 'Collapsed' }
+        if (-not $script:hideFace) {
+            $FaceSleep.Visibility = if ($mood -eq 'sleep') { 'Visible' } else { 'Collapsed' }
+            $FaceGrow.Visibility  = if ($mood -eq 'grow')  { 'Visible' } else { 'Collapsed' }
+            $FaceHot.Visibility   = if ($mood -in 'soon', 'ripe') { 'Visible' } else { 'Collapsed' }
+        }
     }
     if ($mood -eq 'ripe') { $T1.Foreground = '#D33' }
     elseif ($mood -eq 'soon') { $T1.Foreground = '#C07800' }
