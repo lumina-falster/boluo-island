@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5a623">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<title>🍍 菠萝岛果实助手</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍍</text></svg>">
+<style>
+:root{
+  --bg:#f7f3e8;--card:#ffffff;--ink:#2b2a26;--sub:#8a8577;--line:#ece5d2;
+  --acc:#f5a623;--acc-deep:#d98c0a;--green:#2e9e5b;--orange:#f08c00;--red:#e5484d;
+  --radius:16px;--shadow:0 2px 10px rgba(80,60,10,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--ink);min-height:100vh;
+  padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+input,select,textarea{font-family:inherit;font-size:15px;color:var(--ink)}
+.wrap{max-width:640px;margin:0 auto}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:20;color:#fff;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+  background:linear-gradient(135deg,#ffb84d,#f5a623 55%,#e8940a);box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:10px}
+.brand{font-size:18px;font-weight:700;letter-spacing:.5px;flex:1;min-width:0}
+.brand small{display:block;font-size:11px;font-weight:400;opacity:.9;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbtn{width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.22);color:#fff;font-size:17px;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.hbtn:active{background:rgba(255,255,255,.4)}
+
+/* ---------- banner ---------- */
+.banner{margin:10px 14px 0;background:#fff6e0;border:1px solid #f3dfae;color:#8a6d1f;border-radius:12px;
+  padding:10px 12px;font-size:13px;line-height:1.5}
+.banner b{color:#c77c00}
+
+/* ---------- summary ---------- */
+.summary{margin:12px 14px 0;background:linear-gradient(150deg,#fffdf6,#fff6df);border:1px solid #f1e6c2;
+  border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow)}
+.counts{display:flex;gap:6px;flex-wrap:wrap}
+.cnt{font-size:12px;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.cnt b{font-size:13px}
+.cnt.ripe b{color:var(--red)}.cnt.soon b{color:var(--orange)}.cnt.grow b{color:var(--green)}
+.next{margin-top:9px;font-size:13px;color:#6b6455;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.next b{font-size:15px;color:var(--ink)}
+.next .ncd{font-variant-numeric:tabular-nums;color:var(--acc-deep);font-weight:700}
+
+/* ---------- toolbar ---------- */
+.toolbar{display:flex;align-items:center;gap:8px;padding:12px 14px 0}
+.tbtn{padding:8px 16px;border-radius:999px;background:#fff;border:1.5px solid #e3dcc7;font-size:13px;
+  font-weight:600;color:#6b6455;box-shadow:var(--shadow)}
+.tbtn:active{filter:brightness(.95)}
+.tbtn.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.tipbar{margin:8px 14px 0;font-size:12px;color:#8a6d1f;background:#fff6e0;border:1px solid #f3dfae;
+  border-radius:10px;padding:7px 12px;display:none;line-height:1.6}
+.tipbar.show{display:block}
+
+/* ---------- 8x8 grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;padding:10px 14px 4px}
+.grid.batching{touch-action:none}
+.cell{background:var(--card);border-radius:10px;border:1.5px solid transparent;aspect-ratio:1/1.18;
+  display:flex;flex-direction:column;justify-content:space-between;padding:4px 5px;cursor:pointer;
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;box-shadow:0 1px 3px rgba(80,60,10,.06)}
+.cell:active{filter:brightness(.96)}
+.ctop{display:flex;justify-content:space-between;align-items:center;gap:2px;min-width:0}
+.cl{font-size:9px;color:var(--sub);white-space:nowrap;overflow:hidden}
+.ce{font-size:11px;line-height:1;white-space:nowrap}
+.fdot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--acc-deep);margin-left:1px;vertical-align:2px}
+.cd{font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;text-align:center;line-height:1.15}
+.cell.st-empty{border-style:dashed;border-color:#ddd4bb;background:rgba(255,255,255,.4);box-shadow:none}
+.cell.st-empty .cd{color:#c9bf9f;font-weight:600;font-size:14px}
+.cell.st-growing{border-color:#bfe3cd}.cell.st-growing .cd{color:var(--green)}
+.cell.st-soon{border-color:#f2c675;background:#fdf4e1}.cell.st-soon .cd{color:var(--orange)}
+.cell.st-ripe{border-color:#ef9a9d;background:#fdeef0;animation:cellpulse 1.6s infinite}.cell.st-ripe .cd{color:var(--red)}
+.cell.sel{background:var(--acc)!important;border-color:var(--acc-deep)!important}
+.cell.sel .cd{color:#fff!important}
+@keyframes cellpulse{0%,100%{box-shadow:0 1px 3px rgba(80,60,10,.06)}50%{box-shadow:0 0 0 4px rgba(229,72,77,.15)}}
+
+/* ---------- batch bar ---------- */
+.batchbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:22;
+  background:rgba(45,40,25,.95);color:#fff;border-radius:16px;padding:10px 14px;max-width:616px;margin:0 auto;
+  display:none;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
+.batchbar.show{display:flex}
+.batchbar .bcnt{flex:1;font-size:13px}
+.batchbar button{background:rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600}
+.batchbar button.go{background:var(--acc)}
+.batchbar button.red{background:rgba(229,72,77,.85)}
+
+/* ---------- sheets ---------- */
+.mask{position:fixed;inset:0;background:rgba(30,25,10,.45);opacity:0;pointer-events:none;transition:opacity .22s;z-index:25}
+.mask.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-radius:22px 22px 0 0;
+  transform:translateY(105%);transition:transform .26s cubic-bezier(.32,.72,.33,1);
+  max-height:88vh;overflow-y:auto;padding:16px 18px calc(20px + env(safe-area-inset-bottom));
+  -webkit-overflow-scrolling:touch}
+.sheet.open{transform:translateY(0)}
+.sheet h3{font-size:17px;margin-bottom:2px}
+.sheet .sub{font-size:12px;color:var(--sub);margin-bottom:12px}
+.grab{width:36px;height:4px;border-radius:2px;background:#e5dec9;margin:0 auto 12px}
+.frow{margin-bottom:13px}
+.flabel{font-size:13px;color:#6b6455;margin-bottom:7px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{padding:6px 13px;border-radius:999px;border:1px solid #e3dcc7;background:#fbf9f2;font-size:13px;color:#5f594b}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+input[type=text],input[type=number],input[type=password],input[type=datetime-local],select{
+  width:100%;padding:10px 12px;border:1.5px solid #e3dcc7;border-radius:11px;background:#fbf9f2;outline:none}
+input:focus{border-color:var(--acc);background:#fff}
+.hidden{display:none!important}
+.trow{display:flex;gap:10px;align-items:center}
+.trow input{flex:1}
+.tunit{font-size:13px;color:var(--sub);flex:none}
+.tabs{display:flex;background:#f0ebdb;border-radius:11px;padding:3px;margin-bottom:13px}
+.tab{flex:1;text-align:center;padding:8px 0;border-radius:9px;font-size:14px;color:#7a7365;font-weight:600}
+.tab.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.btnrow{display:flex;gap:10px;margin-top:6px}
+.btn{flex:1;padding:13px 0;border-radius:13px;font-size:15px;font-weight:700;text-align:center}
+.btn.primary{background:linear-gradient(135deg,#ffb84d,#ef9d10);color:#fff;box-shadow:0 3px 10px rgba(230,150,20,.35)}
+.btn.primary:active{filter:brightness(.92)}
+.btn.silent{background:#f0ebdb;color:#6b6455}
+.btn:disabled{opacity:.45}
+.mini{padding:6px 12px;border-radius:9px;font-size:12px;font-weight:600;background:#f0ebdb;color:#6b6455}
+.hint{font-size:12px;color:#a09884;line-height:1.6;margin-top:6px}
+.hint a{color:#2c6bd8;text-decoration:none}
+.checkrow{display:flex;align-items:center;gap:9px;padding:9px 2px;font-size:14px}
+.checkrow input{width:18px;height:18px;accent-color:var(--acc);flex:none}
+.numrow{display:flex;align-items:center;gap:8px}
+.numrow input{width:90px}
+.sec{border-top:1px dashed #e5dec9;margin:16px 0 12px;padding-top:4px}
+
+/* view sheet */
+.bigcd{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums;text-align:center;letter-spacing:1px;margin:6px 0 2px}
+.bigmeta{text-align:center;font-size:13px;color:var(--sub);margin-bottom:14px}
+.vtags{display:flex;gap:7px;justify-content:center;margin-bottom:4px;flex-wrap:wrap}
+.vtag{font-size:12px;background:#fdf1d7;color:var(--acc-deep);border-radius:8px;padding:3px 10px}
+.vnote{font-size:12px;color:#8a8577;text-align:center;margin-bottom:10px;background:#fbf9f2;border-radius:9px;padding:7px 10px}
+
+/* toast */
+#toast{position:fixed;left:50%;bottom:calc(46px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);
+  background:rgba(40,36,26,.92);color:#fff;font-size:13px;border-radius:999px;padding:9px 18px;
+  opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:86vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.err{background:rgba(190,50,55,.95)}
+
+footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-height:1.7}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">🍍 菠萝岛果实助手<small id="syncInfo">加载中…</small></div>
+  <button class="hbtn" id="btnRefresh" title="刷新">⟳</button>
+  <button class="hbtn" id="btnSettings" title="设置">⚙️</button>
+</header>
+
+<div class="wrap">
+  <div class="banner hidden" id="setupBanner"></div>
+
+  <div class="summary">
+    <div class="counts" id="counts"></div>
+    <div class="next" id="nextLine"></div>
+  </div>
+
+  <div class="toolbar">
+    <button class="tbtn" id="btnBatch">批量种植</button>
+  </div>
+  <div class="tipbar" id="tipBatch">👆 拖动滑过地块进行选择（滑过已选地块可取消），选好后点下方「种植」</div>
+
+  <div class="grid" id="plotGrid"></div>
+
+  <footer>手动录入式工具 · 数据保存在你自己的 GitHub 仓库 data.json<br>倒计时基于录入时刻推算，游戏内被催熟/加速后请及时重新录入</footer>
+</div>
+
+<div class="batchbar" id="batchBar">
+  <span class="bcnt" id="selCount">已选 0 块</span>
+  <button class="go" id="btnSelPlant">种植</button>
+  <button class="red" id="btnSelClear">清空</button>
+  <button id="btnSelExit">退出</button>
+</div>
+
+<div class="mask" id="mask"></div>
+
+<!-- 录入/编辑地块 -->
+<div class="sheet" id="sheetPlot">
+  <div class="grab"></div>
+  <h3 id="plotTitle">种植果实</h3>
+  <div class="sub">照着游戏里显示的剩余时间填，成熟时刻自动计算</div>
+  <div class="frow" id="nameRow"><div class="flabel">地块名称（可改成游戏里的位置叫法）</div><input type="text" id="inName" maxlength="12"></div>
+  <div class="frow"><div class="flabel">果实</div><div class="chips" id="fruitChips"></div><input type="text" id="inFruit" class="hidden" placeholder="输入果实名称" maxlength="10"></div>
+  <div class="frow"><div class="flabel">肥料（部分肥料会影响成熟时间）</div><div class="chips" id="fertChips"></div><input type="text" id="inFert" class="hidden" placeholder="输入肥料名称" maxlength="12"></div>
+  <div class="tabs">
+    <button class="tab on" id="tabRemain" data-mode="remain">按剩余时间录入</button>
+    <button class="tab" id="tabPlan" data-mode="plan">按种植时间推算</button>
+  </div>
+  <div id="boxRemain">
+    <div class="frow"><div class="flabel">游戏里显示的剩余时间</div>
+      <div class="trow"><input type="number" id="inRemH" min="0" max="999" inputmode="numeric" placeholder="时"><span class="tunit">小时</span><input type="number" id="inRemM" min="0" max="59" inputmode="numeric" placeholder="分"><span class="tunit">分钟</span></div>
+    </div>
+    <div class="chips" id="quickChips"></div>
+  </div>
+  <div id="boxPlan" class="hidden">
+    <div class="frow"><div class="flabel">种植时间</div><input type="datetime-local" id="inPlanted"></div>
+    <div class="frow"><div class="flabel">成熟时长（可按肥料效果自行调整）</div>
+      <div class="trow"><input type="number" id="inDurH" min="0" max="999" inputmode="numeric" placeholder="时"><span class="tunit">小时</span><input type="number" id="inDurM" min="0" max="59" inputmode="numeric" placeholder="分"><span class="tunit">分钟</span></div>
+    </div>
+  </div>
+  <div class="frow" id="noteRow" style="margin-top:13px"><div class="flabel">备注（可选）</div><input type="text" id="inNote" maxlength="30" placeholder="例如：留着做杂交"></div>
+  <div class="btnrow">
+    <button class="btn silent" data-close>取消</button>
+    <button class="btn primary" id="btnPlotSave">保存</button>
+  </div>
+</div>
+
+<!-- 地块详情 -->
+<div class="sheet" id="sheetView">
+  <div class="grab"></div>
+  <h3 id="vName" style="text-align:center"></h3>
+  <div class="vtags" id="vTags"></div>
+  <div class="bigcd" id="vCd"></div>
+  <div class="bigmeta" id="vMeta"></div>
+  <div class="vnote hidden" id="vNote"></div>
+  <div class="btnrow">
+    <button class="btn silent" data-close>关闭</button>
+    <button class="btn primary" id="btnEditInfo">编辑 / 重新录入</button>
+  </div>
+  <div class="btnrow"><button class="btn silent" id="btnHarvest">已收获，清空地块 ✓</button></div>
+  <div class="hint" id="vHist" style="text-align:center"></div>
+</div>
+
+<!-- 设置 -->
+<div class="sheet" id="sheetSettings">
+  <div class="grab"></div>
+  <h3>设置</h3>
+  <div class="sec"></div>
+  <div class="frow"><div class="flabel">GitHub 用户名</div><input type="text" id="cfgOwner" placeholder="例如 zhangsan" autocapitalize="off"></div>
+  <div class="frow"><div class="flabel">仓库名</div><input type="text" id="cfgRepo" placeholder="例如 boluo-island" autocapitalize="off"></div>
+  <div class="frow"><div class="flabel">访问令牌 PAT</div><input type="password" id="cfgPat" placeholder="ghp_ / github_pat_ 开头">
+    <div class="hint">建议用 Fine-grained PAT：仅授权本仓库，权限给 Contents 读写 + Actions 读写。令牌只保存在你手机浏览器本地，不会上传。</div>
+  </div>
+  <div class="btnrow" style="margin-bottom:6px"><button class="btn primary" id="btnConnect">测试并保存连接</button></div>
+  <div class="hint" id="pagesHint"></div>
+
+  <div class="sec"></div>
+  <div class="frow"><div class="flabel">提前提醒（成熟前多少分钟推送）</div>
+    <div class="numrow"><input type="number" id="cfgRemind" min="0" max="720" inputmode="numeric"><span class="tunit">分钟</span></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="cfgOnRipe"><span>成熟时刻再推送一次（已成熟，可收获）</span></label>
+  <div class="flabel" style="margin-top:8px">通知渠道（密钥配置在仓库 Settings → Secrets）</div>
+  <label class="checkrow"><input type="checkbox" id="cfgChSc"><span>Server酱（微信推送）</span></label>
+  <label class="checkrow"><input type="checkbox" id="cfgChWx"><span>企业微信机器人</span></label>
+  <label class="checkrow"><input type="checkbox" id="cfgChPp"><span>PushPlus（备选微信推送）</span></label>
+  <div class="btnrow" style="margin-top:8px"><button class="btn primary" id="btnSaveSettings">保存设置</button></div>
+
+  <div class="sec"></div>
+  <div class="flabel">通知测试</div>
+  <div class="btnrow"><button class="btn silent" id="btnTest">发送测试通知</button><button class="btn silent" id="btnCheckNow">立即检查提醒</button></div>
+  <div class="hint">提醒由 GitHub Actions 每 5 分钟自动检查一次（高峰期可能延迟几分钟）。<br>详细配置说明见仓库 README.md。</div>
+
+  <div class="btnrow" style="margin-top:14px"><button class="btn silent" data-close>关闭</button></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+'use strict';
+/* ================= 常量与状态 ================= */
+const API='https://api.github.com';
+const ROWS=8,COLS=8;
+const FRUITS=['菠萝','凤梨','西瓜','南瓜','萝卜','桃子','草莓','玉米','神秘种子'];
+const FERTS=['无','重量化肥','变异化肥','促熟化肥'];
+const EMOJI={'菠萝':'🍍','凤梨':'🍍','西瓜':'🍉','南瓜':'🎃','萝卜':'🥕','桃子':'🍑','草莓':'🍓','玉米':'🌽','神秘种子':'❓'};
+const QUICK=[[0,30,'30分钟'],[1,0,'1小时'],[2,0,'2小时'],[4,0,'4小时'],[8,0,'8小时'],[12,0,'12小时'],[24,0,'24小时']];
+const LS_CFG='boluo_cfg',LS_DATA='boluo_data';
+let cfg={};try{cfg=JSON.parse(localStorage.getItem(LS_CFG)||'{}')}catch(e){cfg={}}
+let data=null;
+let viewId=null,editIds=[],timeMode='remain',selFruit=null,selFert=null;
+let batchMode=false,dragSel=null;
+const selectedSet=new Set();
+let lastFetch=0,toastTimer=null,hadLocalData=false;
+
+/* ================= 工具函数 ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const byId=id=>(data.plots||[]).find(p=>p.id===id);
+function connected(){return !!(cfg.owner&&cfg.repo)}
+function toast(msg,err){const t=$('#toast');t.textContent=msg;t.className='show'+(err?' err':'');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.className='',2600)}
+function b64enc(str){const bytes=new TextEncoder().encode(str);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
+function b64dec(b64){const bin=atob(b64.replace(/\s/g,''));const bytes=new Uint8Array([...bin].map(c=>c.charCodeAt(0)));return new TextDecoder('utf-8').decode(bytes)}
+function fmtAt(ms){return new Date(ms).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).replace(/\//g,'-')}
+function fmtHM(ms){return new Date(ms).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',hour12:false})}
+function cdText(ms){
+  if(ms<=0)return'已成熟';
+  const s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),ss=s%60;
+  return (d?d+'天':'')+((h||d)?pad(h)+':':'')+pad(m)+':'+pad(ss);
+}
+function fmtCompact(ms){
+  if(ms<=0)return'熟';
+  const m=Math.floor(ms/60000);
+  if(m<60)return m+'分';
+  const h=Math.floor(m/60);
+  if(h<24)return h+':'+pad(m%60);
+  const d=Math.floor(h/24),rh=h%24;
+  return rh?(d+'天'+rh+'时'):d+'天';
+}
+function emojiOf(f){return EMOJI[f]||(f?'🌱':'')}
+function toLocalInput(ms){const d=new Date(ms);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)}
+function defaultData(){
+  const plots=[];
+  for(let r=1;r<=ROWS;r++)for(let c=1;c<=COLS;c++)plots.push(emptyPlot('g'+r+'c'+c,r+'-'+c));
+  return{version:2,settings:{remindMinutes:15,notifyOnRipe:true,channels:{serverchan:true,wecom:true,pushplus:false}},plots};
+}
+function emptyPlot(id,name){return{id,name,fruit:'',fertilizer:'无',note:'',plantedAt:null,ripenAt:null,notifiedSoon:false,notifiedRipe:false,harvestCount:0,lastHarvestAt:null}}
+function statusOf(p){
+  if(!p.ripenAt)return'empty';
+  const t=p.ripenAt-Date.now(),r=(data.settings.remindMinutes||0)*60000;
+  if(t<=0)return'ripe';if(t<=r)return'soon';return'growing';
+}
+
+/* ================= GitHub API ================= */
+function ghHeaders(){
+  const h={'Accept':'application/vnd.github+json'};
+  if(cfg.pat)h.Authorization='Bearer '+cfg.pat;
+  return h;
+}
+async function ghFetch(path,opts={}){
+  const r=await fetch(API+path,{...opts,headers:{...ghHeaders(),...(opts.headers||{})}});
+  if(!r.ok){
+    let detail='';try{const j=await r.json();detail=j.message||''}catch(e){}
+    if(r.status===401)throw new Error('令牌无效或已过期，请更新 PAT');
+    if(r.status===404)throw new Error('未找到（404）：'+detail);
+    if(r.status===409)throw new Error('冲突（409），正在重试');
+    if(r.status===403&&/rate limit/i.test(detail))throw new Error('GitHub API 限流，请稍后再试');
+    throw new Error('GitHub '+r.status+'：'+detail);
+  }
+  return r;
+}
+async function loadDataFromGH(){
+  const r=await ghFetch(`/repos/${cfg.owner}/${cfg.repo}/contents/data.json`);
+  const j=await r.json();
+  const d=JSON.parse(b64dec(j.content));
+  d._sha=j.sha;
+  return d;
+}
+async function putDataToGH(obj){
+  const content=b64enc(JSON.stringify(obj,null,2));
+  const r=await ghFetch(`/repos/${cfg.owner}/${cfg.repo}/contents/data.json`,{
+    method:'PUT',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({message:'update: 菠萝岛数据 '+fmtHM(Date.now()),content,sha:obj._sha,branch:cfg.branch||'main'})
+  });
+  const j=await r.json();
+  obj._sha=(j.content||{}).sha;
+  return obj;
+}
+async function dispatchWorkflow(test){
+  await ghFetch(`/repos/${cfg.owner}/${cfg.repo}/actions/workflows/notify.yml/dispatches`,{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({ref:cfg.branch||'main',inputs:{test:test?'true':'false'}})
+  });
+}
+
+/* ================= 数据同步 ================= */
+function cacheData(){
+  const copy=JSON.parse(JSON.stringify(data));delete copy._sha;
+  localStorage.setItem(LS_DATA,JSON.stringify(copy));
+}
+function persistLocal(){data.updatedAt=Date.now();cacheData()}
+
+async function saveEdits(ch){
+  persistLocal();
+  renderAll();
+  if(!connected())return;
+  for(let i=0;i<3;i++){
+    try{
+      const server=await loadDataFromGH();
+      const localById=new Map(data.plots.map(p=>[p.id,p]));
+      let plots=(server.plots||[]).filter(sp=>!(ch.deleted||[]).includes(sp.id));
+      plots=plots.map(sp=>(ch.edited||[]).includes(sp.id)&&localById.has(sp.id)?localById.get(sp.id):sp);
+      for(const lp of data.plots){if(!plots.some(p=>p.id===lp.id))plots.push(lp)}
+      server.plots=plots;
+      if(ch.settings)server.settings=data.settings;
+      const saved=await putDataToGH(server);
+      saved.updatedAt=Date.now();
+      data=saved;cacheData();lastFetch=Date.now();
+      renderAll();
+      if(i>0)toast('已同步到 GitHub ✓（重试后成功）');
+      return;
+    }catch(e){
+      if(i===2){toast('同步失败：'+e.message,true);renderAll()}
+      else await sleep(900);
+    }
+  }
+}
+async function refresh(silent){
+  if(!connected()){renderAll();return}
+  try{
+    const server=await loadDataFromGH();
+    data=server;cacheData();lastFetch=Date.now();
+    if(hadLocalData&&!(data.plots||[]).some(p=>p.ripenAt)){
+      const localCopy=JSON.parse(localStorage.getItem(LS_DATA)||'null');
+      if(localCopy&&(localCopy.plots||[]).some(p=>p.ripenAt)&&confirm('检测到本机有未上传的种植数据，是否上传到 GitHub？')){
+        const byIdMap=new Map(localCopy.plots.map(p=>[p.id,p]));
+        data.plots=data.plots.map(p=>byIdMap.get(p.id)&&byIdMap.get(p.id).ripenAt?byIdMap.get(p.id):p);
+        data.settings=localCopy.settings;
+        hadLocalData=false;
+        await saveEdits({edited:data.plots.filter(p=>p.ripenAt).map(p=>p.id),settings:true});
+        toast('本地数据已上传 ✓');return;
+      }
+    }
+    hadLocalData=false;
+    renderAll();
+    if(!silent)toast('已刷新 ✓');
+  }catch(e){
+    renderAll();
+    toast('刷新失败：'+e.message,true);
+  }
+}
+
+/* ================= 渲染 ================= */
+function renderAll(){renderHeader();renderBanner();renderGrid();renderSummary();tick()}
+
+function renderHeader(){
+  const el=$('#syncInfo');
+  if(!connected()){el.textContent='本地模式（未连接 GitHub）';return}
+  const t=lastFetch?fmtHM(lastFetch):'--:--';
+  el.textContent='GitHub · 更新于 '+t+(cfg.pat?'':' · 只读（未配置PAT）');
+}
+function renderBanner(){
+  const b=$('#setupBanner');
+  if(connected()&&cfg.pat){b.classList.add('hidden');return}
+  b.classList.remove('hidden');
+  b.innerHTML=connected()
+    ?'已连接仓库但<b>未配置访问令牌（PAT）</b>：只能查看，无法录入/保存。点此去设置 →'
+    :'当前为<b>本地模式</b>：数据只存在本机浏览器，<b>无法定时推送提醒</b>。连接 GitHub 仓库后解锁全部功能 →';
+  b.onclick=()=>openSheet('sheetSettings');
+}
+function renderGrid(){
+  $('#plotGrid').innerHTML=(data.plots||[]).map(p=>
+    `<div class="cell" data-id="${p.id}"><div class="ctop"><span class="cl">${esc(p.name)}</span><span class="ce"></span></div><div class="cd">＋</div></div>`
+  ).join('');
+}
+function renderSummary(){
+  const st={empty:0,growing:0,soon:0,ripe:0};
+  (data.plots||[]).forEach(p=>st[statusOf(p)]++);
+  $('#counts').innerHTML=
+    `<span class="cnt ripe">已成熟 <b>${st.ripe}</b></span>`+
+    `<span class="cnt soon">即将成熟 <b>${st.soon}</b></span>`+
+    `<span class="cnt grow">生长中 <b>${st.growing}</b></span>`+
+    `<span class="cnt">未种植 <b>${st.empty}</b></span>`;
+}
+function tick(){
+  const now=Date.now(),r=(data.settings.remindMinutes||0)*60000;
+  let next=null;
+  document.querySelectorAll('#plotGrid .cell').forEach(cell=>{
+    const p=byId(cell.dataset.id);
+    if(!p)return;
+    const st=statusOf(p);
+    cell.className='cell st-'+st+(selectedSet.has(p.id)?' sel':'');
+    if(p.ripenAt){
+      const left=p.ripenAt-now;
+      const fert=p.fertilizer&&p.fertilizer!=='无'?'<i class="fdot"></i>':'';
+      cell.querySelector('.ce').innerHTML=emojiOf(p.fruit)+fert;
+      cell.querySelector('.cd').textContent=left<=0?'熟':fmtCompact(left);
+      if(!next||p.ripenAt<next.ripenAt)next=p;
+    }else{
+      cell.querySelector('.ce').innerHTML='';
+      cell.querySelector('.cd').textContent='＋';
+    }
+    cell.querySelector('.cl').textContent=(p.note?'✎':'')+p.name;
+  });
+  if(next){
+    const left=next.ripenAt-now;
+    $('#nextLine').innerHTML=left<=0
+      ?`下一个成熟：<b>${esc(next.name)} · ${esc(next.fruit)}</b><span class="ncd">已成熟，快去收获</span>`
+      :`下一个成熟：<b>${esc(next.name)} · ${esc(next.fruit)}</b>（${fmtAt(next.ripenAt)}）<span class="ncd">剩 ${cdText(left)}</span>`;
+  }else{
+    $('#nextLine').innerHTML='<span style="color:#b9ab7d">暂无种植中的果实，点空地块或用批量模式开始录入</span>';
+  }
+  if(viewId&&$('#sheetView').classList.contains('open')){
+    const p=byId(viewId);
+    if(p&&p.ripenAt){
+      const left=p.ripenAt-Date.now();
+      $('#vCd').textContent=left<=0?'已成熟 🎉':cdText(left);
+      $('#vCd').style.color=left<=0?'var(--red)':(left<=r?'var(--orange)':'var(--green)');
+      $('#vMeta').textContent=left<=0?'已于 '+fmtAt(p.ripenAt)+' 成熟，快去收获':'预计 '+fmtAt(p.ripenAt)+' 成熟（北京时间）';
+    }
+  }
+}
+setInterval(tick,1000);
+
+/* ================= 弹层 ================= */
+function openSheet(id){
+  $('#mask').classList.add('open');
+  document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('open'));
+  $('#'+id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSheets(){
+  $('#mask').classList.remove('open');
+  document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('open'));
+  document.body.style.overflow='';
+  viewId=null;
+}
+$('#mask').onclick=closeSheets;
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeSheets);
+
+/* ---- chips 渲染 ---- */
+function renderChips(box,items,selected,onPick,customInput){
+  box.innerHTML='';
+  [...items,'自定义'].forEach(it=>{
+    const isOn=it==='自定义'?(selected==='__custom'):(selected===it);
+    const c=document.createElement('button');
+    c.className='chip'+(isOn?' on':'');c.textContent=it;
+    c.onclick=()=>onPick(it==='自定义'?'__custom':it);
+    box.appendChild(c);
+  });
+  if(customInput)customInput.classList.toggle('hidden',selected!=='__custom');
+}
+function pickFruit(v){
+  selFruit=v;
+  renderChips($('#fruitChips'),FRUITS,selFruit,pickFruit,$('#inFruit'));
+  if(v!=='__custom')$('#inFruit').value='';
+  else setTimeout(()=>$('#inFruit').focus(),50);
+}
+function pickFert(v){
+  selFert=v;
+  renderChips($('#fertChips'),FERTS,selFert,pickFert,$('#inFert'));
+  if(v!=='__custom')$('#inFert').value='';
+  else setTimeout(()=>$('#inFert').focus(),50);
+}
+QUICK.forEach(([h,m,label])=>{
+  const c=document.createElement('button');
+  c.className='chip';c.textContent=label;
+  c.onclick=()=>{$('#inRemH').value=h;$('#inRemM').value=m};
+  $('#quickChips').appendChild(c);
+});
+[['tabRemain','remain'],['tabPlan','plan']].forEach(([id,m])=>{
+  $('#'+id).onclick=()=>setTab(m);
+});
+function setTab(m){
+  timeMode=m;
+  $('#tabRemain').classList.toggle('on',m==='remain');
+  $('#tabPlan').classList.toggle('on',m==='plan');
+  $('#boxRemain').classList.toggle('hidden',m!=='remain');
+  $('#boxPlan').classList.toggle('hidden',m!=='plan');
+}
+
+/* ---- 地块录入 sheet（单块/批量通用） ---- */
+function openPlotSheet(ids){
+  editIds=ids.slice();
+  const batch=ids.length>1;
+  const p=byId(ids[0]);
+  if(!p)return;
+  $('#plotTitle').textContent=batch
+    ?('批量种植 · '+ids.length+' 块地')
+    :(p.ripenAt?('编辑 · '+p.name):('在 '+p.name+' 种植'));
+  $('#nameRow').classList.toggle('hidden',batch);
+  $('#noteRow').classList.toggle('hidden',batch);
+  $('#inName').value=p.name;
+  selFruit=FRUITS.includes(p.fruit)?p.fruit:(p.fruit?'__custom':null);
+  $('#inFruit').value=selFruit==='__custom'?p.fruit:'';
+  renderChips($('#fruitChips'),FRUITS,selFruit,pickFruit,$('#inFruit'));
+  selFert=FERTS.includes(p.fertilizer)?p.fertilizer:(p.fertilizer?'__custom':'无');
+  $('#inFert').value=selFert==='__custom'?p.fertilizer:'';
+  renderChips($('#fertChips'),FERTS,selFert,pickFert,$('#inFert'));
+  $('#inRemH').value='';$('#inRemM').value='';
+  $('#inDurH').value='';$('#inDurM').value='';
+  $('#inPlanted').value=toLocalInput(Date.now());
+  $('#inNote').value=p.note||'';
+  setTab('remain');
+  openSheet('sheetPlot');
+}
+$('#btnPlotSave').onclick=()=>{
+  if(!editIds.length)return;
+  const batch=editIds.length>1;
+  const fruit=selFruit==='__custom'?$('#inFruit').value.trim():(selFruit||'');
+  const fert=selFert==='__custom'?$('#inFert').value.trim():(selFert||'无');
+  if(!fruit){toast('请选择或输入果实名称',true);return}
+  let ripenAt=null,plantedBase=null;
+  if(timeMode==='remain'){
+    const h=+$('#inRemH').value||0,m=+$('#inRemM').value||0;
+    if(h<=0&&m<=0){toast('请填写游戏里显示的剩余时间',true);return}
+    ripenAt=Date.now()+h*3600000+m*60000;
+  }else{
+    const h=+$('#inDurH').value||0,m=+$('#inDurM').value||0;
+    if(h<=0&&m<=0){toast('请填写成熟时长',true);return}
+    const pv=$('#inPlanted').value;
+    plantedAt=pv?new Date(pv).getTime():Date.now();
+    ripenAt=plantedAt+h*3600000+m*60000;
+  }
+  const edited=[];
+  for(const id of editIds){
+    const p=byId(id);if(!p)continue;
+    const upd={fruit,fertilizer:fert||'无',ripenAt,notifiedSoon:false,notifiedRipe:false};
+    upd.plantedAt=timeMode==='plan'?plantedBase:p.plantedAt;
+    if(!batch){
+      upd.name=$('#inName').value.trim()||p.name;
+      upd.note=$('#inNote').value.trim();
+    }
+    Object.assign(p,upd);
+    edited.push(id);
+  }
+  closeSheets();
+  if(batch)setBatch(false);
+  saveEdits({edited});
+  toast(connected()?'保存中…':'已保存（本地模式）');
+};
+
+/* ---- 详情 sheet ---- */
+$('#plotGrid').addEventListener('click',e=>{
+  if(batchMode)return;
+  const cell=e.target.closest('.cell');if(!cell)return;
+  const p=byId(cell.dataset.id);if(!p)return;
+  if(!p.ripenAt){openPlotSheet([p.id]);return}
+  openViewSheet(p.id);
+});
+function openViewSheet(id){
+  viewId=id;
+  const p=byId(id);if(!p||!p.ripenAt)return;
+  $('#vName').textContent=p.name+' · '+p.fruit;
+  const tags=[];
+  if(p.fertilizer&&p.fertilizer!=='无')tags.push('🌱 '+esc(p.fertilizer));
+  if(p.plantedAt)tags.push('种于 '+fmtAt(p.plantedAt));
+  $('#vTags').innerHTML=tags.map(t=>`<span class="vtag">${t}</span>`).join('')||'<span class="vtag">📝 暂无附加信息</span>';
+  const note=$('#vNote');
+  if(p.note){note.textContent='备注：'+p.note;note.classList.remove('hidden')}else note.classList.add('hidden');
+  $('#vHist').textContent=p.harvestCount?('本地块累计收获 '+p.harvestCount+' 次'):'';
+  tick();
+  openSheet('sheetView');
+}
+$('#btnEditInfo').onclick=()=>{if(viewId)openPlotSheet([viewId])};
+$('#btnHarvest').onclick=()=>{
+  const p=byId(viewId);if(!p)return;
+  p.fruit='';p.fertilizer='无';p.note='';p.plantedAt=null;p.ripenAt=null;
+  p.notifiedSoon=false;p.notifiedRipe=false;p.harvestCount=(p.harvestCount||0)+1;p.lastHarvestAt=Date.now();
+  closeSheets();
+  saveEdits({edited:[p.id]});
+  toast('已记录收获，地块可重新种植 🌱');
+};
+
+/* ---- 批量模式：拖动滑选 ---- */
+function setBatch(on){
+  batchMode=on;
+  $('#btnBatch').classList.toggle('on',on);
+  $('#btnBatch').textContent=on?'✓ 退出批量':'批量种植';
+  $('#plotGrid').classList.toggle('batching',on);
+  $('#tipBatch').classList.toggle('show',on);
+  $('#batchBar').classList.toggle('show',on);
+  if(!on){
+    selectedSet.clear();
+    document.querySelectorAll('#plotGrid .cell.sel').forEach(c=>c.classList.remove('sel'));
+    $('#selCount').textContent='已选 0 块';
+  }
+}
+$('#btnBatch').onclick=()=>setBatch(!batchMode);
+$('#btnSelExit').onclick=()=>setBatch(false);
+function applySel(cell){
+  const id=cell.dataset.id;
+  if(dragSel==='add')selectedSet.add(id);else selectedSet.delete(id);
+  cell.classList.toggle('sel',selectedSet.has(id));
+  $('#selCount').textContent='已选 '+selectedSet.size+' 块';
+}
+$('#plotGrid').addEventListener('pointerdown',e=>{
+  if(!batchMode)return;
+  const cell=e.target.closest('.cell');if(!cell)return;
+  dragSel=selectedSet.has(cell.dataset.id)?'remove':'add';
+  applySel(cell);
+  e.preventDefault();
+});
+$('#plotGrid').addEventListener('pointermove',e=>{
+  if(!batchMode||!dragSel)return;
+  const el=document.elementFromPoint(e.clientX,e.clientY);
+  const cell=el&&el.closest?el.closest('.cell'):null;
+  if(cell)applySel(cell);
+});
+['pointerup','pointercancel'].forEach(ev=>window.addEventListener(ev,()=>{dragSel=null}));
+$('#btnSelPlant').onclick=()=>{
+  if(!selectedSet.size){toast('先拖动选择地块',true);return}
+  openPlotSheet([...selectedSet]);
+};
+$('#btnSelClear').onclick=()=>{
+  if(!selectedSet.size){toast('先拖动选择地块',true);return}
+  if(!confirm('清空所选 '+selectedSet.size+' 块地的果实？（相当于批量收获）'))return;
+  const edited=[];
+  for(const id of selectedSet){
+    const p=byId(id);if(!p)continue;
+    if(p.ripenAt){p.harvestCount=(p.harvestCount||0)+1;p.lastHarvestAt=Date.now()}
+    Object.assign(p,{fruit:'',fertilizer:'无',note:'',plantedAt:null,ripenAt:null,notifiedSoon:false,notifiedRipe:false});
+    edited.push(id);
+  }
+  saveEdits({edited});
+  toast('已清空 '+edited.length+' 块地 🌱');
+};
+
+/* ---- 设置 sheet ---- */
+$('#btnSettings').onclick=()=>{
+  $('#cfgOwner').value=cfg.owner||'';
+  $('#cfgRepo').value=cfg.repo||'';
+  $('#cfgPat').value=cfg.pat||'';
+  $('#cfgRemind').value=data.settings.remindMinutes;
+  $('#cfgOnRipe').checked=!!data.settings.notifyOnRipe;
+  const ch=data.settings.channels||{};
+  $('#cfgChSc').checked=ch.serverchan!==false;
+  $('#cfgChWx').checked=ch.wecom!==false;
+  $('#cfgChPp').checked=!!ch.pushplus;
+  $('#pagesHint').innerHTML=connected()?('网页地址：<a href="https://'+cfg.owner+'.github.io/'+cfg.repo+'/" target="_blank">https://'+cfg.owner+'.github.io/'+cfg.repo+'/</a>'):'';
+  openSheet('sheetSettings');
+};
+$('#btnConnect').onclick=async()=>{
+  const owner=$('#cfgOwner').value.trim(),repo=$('#cfgRepo').value.trim(),pat=$('#cfgPat').value.trim();
+  if(!owner||!repo){toast('请填写用户名和仓库名',true);return}
+  const btn=$('#btnConnect');btn.disabled=true;btn.textContent='测试中…';
+  const backup=JSON.stringify(cfg);
+  cfg={owner,repo,pat,branch:cfg.branch};
+  try{
+    const r1=await ghFetch(`/repos/${owner}/${repo}`);
+    const j1=await r1.json();cfg.branch=j1.default_branch||'main';
+    await ghFetch(`/repos/${owner}/${repo}/contents/data.json`);
+    localStorage.setItem(LS_CFG,JSON.stringify(cfg));
+    toast('连接成功 ✓ 正在拉取数据…');
+    $('#pagesHint').innerHTML='网页地址：<a href="https://'+owner+'.github.io/'+repo+'/" target="_blank">https://'+owner+'.github.io/'+repo+'/</a><br>默认分支：'+cfg.branch;
+    await refresh(true);
+  }catch(e){
+    cfg=JSON.parse(backup);
+    toast('连接失败：'+e.message,true);
+  }
+  btn.disabled=false;btn.textContent='测试并保存连接';
+};
+$('#btnSaveSettings').onclick=()=>{
+  const rm=Math.max(0,Math.min(720,+$('#cfgRemind').value||0));
+  data.settings.remindMinutes=rm;
+  data.settings.notifyOnRipe=$('#cfgOnRipe').checked;
+  data.settings.channels={serverchan:$('#cfgChSc').checked,wecom:$('#cfgChWx').checked,pushplus:$('#cfgChPp').checked};
+  saveEdits({settings:true});
+  toast('设置已保存 '+(connected()?'并同步 ✓':'（本地模式）'));
+};
+async function runDispatch(test){
+  if(!connected()||!cfg.pat){toast('需要先配置 GitHub 连接和 PAT',true);return}
+  const btn=test?$('#btnTest'):$('#btnCheckNow');
+  btn.disabled=true;btn.textContent='触发中…';
+  try{
+    await dispatchWorkflow(test);
+    toast('已触发，通知将在 1 分钟内到达');
+  }catch(e){toast('触发失败：'+e.message,true)}
+  btn.disabled=false;btn.textContent=test?'发送测试通知':'立即检查提醒';
+}
+$('#btnTest').onclick=()=>runDispatch(true);
+$('#btnCheckNow').onclick=()=>runDispatch(false);
+
+/* ---- 刷新 ---- */
+$('#btnRefresh').onclick=()=>refresh(false);
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible'&&connected()&&Date.now()-lastFetch>60000)refresh(true);
+});
+
+/* ================= 初始化 ================= */
+(function init(){
+  if(!cfg.owner&&location.host.endsWith('.github.io')){
+    const m=location.pathname.match(/^\/([^\/]+)/);
+    if(m){cfg={owner:location.host.split('.')[0],repo:m[1],pat:cfg.pat||'',branch:cfg.branch||''}}
+  }
+  try{
+    const c=JSON.parse(localStorage.getItem(LS_DATA)||'null');
+    if(c&&c.version===2&&c.plots&&c.plots.length){data=c;hadLocalData=(data.plots||[]).some(p=>p.ripenAt)}
+  }catch(e){}
+  if(!data)data=defaultData();
+  data.settings=Object.assign({remindMinutes:15,notifyOnRipe:true,channels:{serverchan:true,wecom:true,pushplus:false}},data.settings||{});
+  renderAll();
+  if(connected())refresh(true);
+})();
+</script>
+</body>
+</html>
