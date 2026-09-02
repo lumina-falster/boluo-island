@@ -162,13 +162,16 @@ GitHub → 头像 → **Settings → Developer settings → Personal access toke
 
 - **分享到其他电脑**（桌宠只读公开仓库，对方无需令牌）：
 
-  - 方式一（推荐）：把 `菠萝岛桌宠.zip`（内含程序+图标+说明）通过微信/网盘/U盘发给对方，解压后双击 `START_PET.bat` 即可，首次运行自动在桌面创建快捷方式
+  - 方式一（推荐）：把 `菠萝岛桌宠.zip` 发给对方，解压后双击 `START_PET.bat` 即可，首次运行自动创建桌面快捷方式
 
-  - 方式二：对方电脑上按 `Win + R` 输入 `powershell` 回车，粘贴运行：
+  - 方式二：对方 `Win + R` → `powershell`，粘贴运行：
     `powershell -NoProfile -ExecutionPolicy Bypass -c "irm https://cdn.jsdelivr.net/gh/lumina-falster/boluo-island@main/pet/install.ps1 | iex"`
-    会自动下载到 `%LOCALAPPDATA%\BoluoPet` 并启动
 
   - 朋友有自己的岛屿？让他先部署自己的仓库，然后右键桌宠「设置仓库」改成他的用户名/仓库名
+
+- **自定义桌宠形象**：在 pet 文件夹放一张 `pet.png`（透明背景 PNG，建议竖版 ≥570×1020；显示区 76×136 等比缩放，方形图居中缩小），重启即替换菠萝造型，表情小脸保留；图片自带表情想隐藏小脸，在 `pet_config.json` 加 `"hideFace": true`
+
+- **换快捷方式图标**：256×256 的 `.ico` 覆盖 `pet/pineapple.ico` 后重启（PNG 转 ico 可用 icoconvert.com 等在线工具）；桌面快捷方式不刷新就删掉，重启桌宠会自动重建
 
 ## 五、说明
 
