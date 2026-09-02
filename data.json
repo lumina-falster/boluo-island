@@ -1,11 +1,11 @@
 {
   "version": 2,
   "settings": {
-    "remindMinutes": 15,
+    "remindMinutes": 3,
     "notifyOnRipe": true,
     "channels": {
       "serverchan": true,
-      "wecom": true,
+      "wecom": false,
       "pushplus": false
     }
   },
@@ -842,5 +842,6 @@
       "harvestCount": 0,
       "lastHarvestAt": null
     }
-  ]
+  ],
+  "_sha": "23789dc544b0d8f101ec506327e9fd41f9f3d768"
 }
