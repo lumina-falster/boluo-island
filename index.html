@@ -6,8 +6,11 @@
 <meta name="theme-color" content="#f5a623">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="菠萝岛">
 <meta name="format-detection" content="telephone=no">
 <title>🍍 菠萝岛果实助手</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍍</text></svg>">
 <style>
 :root{
@@ -70,6 +73,7 @@ header{position:sticky;top:0;z-index:20;color:#fff;padding:calc(10px + env(safe-
 .ctop{display:flex;justify-content:space-between;align-items:center;gap:2px;min-width:0}
 .cl{font-size:9px;color:var(--sub);white-space:nowrap;overflow:hidden}
 .ce{font-size:11px;line-height:1;white-space:nowrap}
+.ow{font-style:normal;font-size:8px;font-weight:800;margin-right:1px}
 .fdot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--acc-deep);margin-left:1px;vertical-align:2px}
 .cd{font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;text-align:center;line-height:1.15}
 .cell.st-empty{border-style:dashed;border-color:#ddd4bb;background:rgba(255,255,255,.4);box-shadow:none}
@@ -87,7 +91,7 @@ header{position:sticky;top:0;z-index:20;color:#fff;padding:calc(10px + env(safe-
   display:none;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
 .batchbar.show{display:flex}
 .batchbar .bcnt{flex:1;font-size:13px}
-.batchbar button{background:rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600}
+.batchbar button{background:rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600}
 .batchbar button.go{background:var(--acc)}
 .batchbar button.red{background:rgba(229,72,77,.85)}
 
@@ -133,6 +137,11 @@ input:focus{border-color:var(--acc);background:#fff}
 .numrow{display:flex;align-items:center;gap:8px}
 .numrow input{width:90px}
 .sec{border-top:1px dashed #e5dec9;margin:16px 0 12px;padding-top:4px}
+.mrow{display:flex;align-items:center;justify-content:space-between;padding:8px 2px;font-size:14px;border-bottom:1px dashed #f0ead8}
+.invlink{font-size:12px;word-break:break-all;background:#fbf9f2;border:1px solid #ece5d2;border-radius:9px;padding:8px 10px;color:#2c6bd8}
+details.steps{margin-top:8px}
+details.steps summary{font-size:13px;color:#6b6455;font-weight:600;padding:6px 0;cursor:pointer}
+details.steps .hint{margin-top:4px}
 
 /* view sheet */
 .bigcd{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums;text-align:center;letter-spacing:1px;margin:6px 0 2px}
@@ -141,12 +150,38 @@ input:focus{border-color:var(--acc);background:#fff}
 .vtag{font-size:12px;background:#fdf1d7;color:var(--acc-deep);border-radius:8px;padding:3px 10px}
 .vnote{font-size:12px;color:#8a8577;text-align:center;margin-bottom:10px;background:#fbf9f2;border-radius:9px;padding:7px 10px}
 
+/* harvest sheet */
+.hvhead{text-align:center;margin-bottom:4px;font-size:15px;font-weight:700}
+
+/* log sheet */
+.statcard{background:#fbf9f2;border:1px solid #ece5d2;border-radius:11px;padding:9px 12px;margin-bottom:8px;font-size:13px;line-height:1.7}
+.statcard b{color:var(--acc-deep)}
+.logrow{display:flex;gap:8px;align-items:baseline;padding:8px 2px;border-bottom:1px dashed #f0ead8;font-size:13px;line-height:1.5}
+.logrow .lt{color:#a09884;font-size:11px;flex:none;width:86px}
+.logrow .lb{flex:1;min-width:0}
+.logrow .res{color:var(--green);font-weight:600}
+
 /* toast */
 #toast{position:fixed;left:50%;bottom:calc(46px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);
   background:rgba(40,36,26,.92);color:#fff;font-size:13px;border-radius:999px;padding:9px 18px;
   opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:86vw;text-align:center}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.err{background:rgba(190,50,55,.95)}
+
+/* ---------- widget mode ---------- */
+body.widgetmode header,body.widgetmode .wrap{display:none}
+#widget{position:fixed;inset:0;z-index:14;background:linear-gradient(180deg,#fff8e6 0%,#ffedb8 60%,#ffd98f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden}
+#wCounts{position:absolute;top:calc(18px + env(safe-area-inset-top));left:0;right:0;display:flex;justify-content:center;gap:8px}
+.wc{font-size:12px;font-weight:700;background:rgba(255,255,255,.75);border-radius:999px;padding:4px 12px;color:#6b6455}
+.wc.r{color:var(--red)}.wc.s{color:var(--orange)}.wc.g{color:var(--green)}
+#wBubble{background:#fff;border-radius:16px;padding:10px 16px;font-size:15px;box-shadow:0 4px 14px rgba(120,80,10,.18);
+  margin-bottom:14px;max-width:82vw;text-align:center;position:relative;line-height:1.5}
+#wBubble::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+  border:9px solid transparent;border-top-color:#fff;border-bottom:0}
+#wBubble b{color:var(--acc-deep);font-variant-numeric:tabular-nums}
+#wPetBox{font-size:34vh;line-height:1;height:44vh;display:flex;align-items:flex-end;justify-content:center}
+#wPetBox img{max-height:44vh;max-width:80vw;object-fit:contain}
 
 footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-height:1.7}
 </style>
@@ -155,6 +190,7 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
 
 <header>
   <div class="brand">🍍 菠萝岛果实助手<small id="syncInfo">加载中…</small></div>
+  <button class="hbtn" id="btnWidget" title="挂件模式">🐱</button>
   <button class="hbtn" id="btnRefresh" title="刷新">⟳</button>
   <button class="hbtn" id="btnSettings" title="设置">⚙️</button>
 </header>
@@ -169,19 +205,29 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
 
   <div class="toolbar">
     <button class="tbtn" id="btnBatch">批量种植</button>
+    <button class="tbtn" id="btnLog">📖 记录本</button>
   </div>
   <div class="tipbar" id="tipBatch">👆 拖动滑过地块进行选择（滑过已选地块可取消），选好后点下方「种植」</div>
 
   <div class="grid" id="plotGrid"></div>
 
-  <footer>手动录入式工具 · 数据保存在你自己的 GitHub 仓库 data.json<br>倒计时基于录入时刻推算，游戏内被催熟/加速后请及时重新录入</footer>
+  <footer>手动录入式工具 · 数据保存在你自己的 GitHub 仓库 data.json<br>
+  倒计时基于录入时刻推算，游戏内被催熟/加速后请及时重新录入<br>
+  📱 装到手机桌面：iOS 用 Safari「分享 → 添加到主屏幕」，安卓点设置里的安装按钮</footer>
 </div>
 
 <div class="batchbar" id="batchBar">
   <span class="bcnt" id="selCount">已选 0 块</span>
   <button class="go" id="btnSelPlant">种植</button>
+  <button id="btnSelReplant">♻️ 再种</button>
   <button class="red" id="btnSelClear">清空</button>
   <button id="btnSelExit">退出</button>
+</div>
+
+<div id="widget" class="hidden">
+  <div id="wCounts"></div>
+  <div id="wBubble">加载中…</div>
+  <div id="wPetBox">🍍</div>
 </div>
 
 <div class="mask" id="mask"></div>
@@ -194,6 +240,7 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
   <div class="frow" id="nameRow"><div class="flabel">地块名称（可改成游戏里的位置叫法）</div><input type="text" id="inName" maxlength="12"></div>
   <div class="frow"><div class="flabel">果实</div><div class="chips" id="fruitChips"></div><input type="text" id="inFruit" class="hidden" placeholder="输入果实名称" maxlength="10"></div>
   <div class="frow"><div class="flabel">肥料（部分肥料会影响成熟时间）</div><div class="chips" id="fertChips"></div><input type="text" id="inFert" class="hidden" placeholder="输入肥料名称" maxlength="12"></div>
+  <div class="frow hidden" id="ownerRow"><div class="flabel">记录人（这块地是谁种的）</div><div class="chips" id="ownerChips"></div></div>
   <div class="tabs">
     <button class="tab on" id="tabRemain">按剩余时间</button>
     <button class="tab" id="tabFresh">刚种下</button>
@@ -212,6 +259,7 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
     <div class="flabel">成熟时长（已按果实自动填入，肥料有加速效果可手动改）</div>
       <div class="trow"><input type="number" id="inDurH" min="0" max="999" inputmode="numeric" placeholder="时"><span class="tunit">小时</span><input type="number" id="inDurM" min="0" max="59" inputmode="numeric" placeholder="分"><span class="tunit">分钟</span></div>
   </div>
+  <div class="hint hidden" id="lastHint"></div>
   <div class="frow" id="noteRow" style="margin-top:13px"><div class="flabel">备注（可选）</div><input type="text" id="inNote" maxlength="30" placeholder="例如：留着做杂交"></div>
   <div class="btnrow">
     <button class="btn silent" data-close>取消</button>
@@ -231,38 +279,123 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
     <button class="btn silent" data-close>关闭</button>
     <button class="btn primary" id="btnEditInfo">编辑 / 重新录入</button>
   </div>
-  <div class="btnrow"><button class="btn silent" id="btnHarvest">已收获，清空地块 ✓</button></div>
+  <div class="btnrow"><button class="btn primary" id="btnHarvest">🧺 记录收获</button></div>
+  <div class="btnrow">
+    <button class="btn silent" id="btnClearOnly">仅清空（不记录）</button>
+  </div>
   <div class="hint" id="vHist" style="text-align:center"></div>
+</div>
+
+<!-- 记录收获 -->
+<div class="sheet" id="sheetHarvest">
+  <div class="grab"></div>
+  <h3>🧺 记录收获</h3>
+  <div class="sub" id="hvSub"></div>
+  <div class="frow"><div class="flabel">收获结果（用于培育对照）</div><div class="chips" id="hvResChips"></div><input type="text" id="hvResInput" class="hidden" placeholder="输入结果，例如：出了 2 个彩虹果" maxlength="20"></div>
+  <div class="frow"><div class="flabel">备注（可选）</div><input type="text" id="hvNote" maxlength="30" placeholder="例如：留了 1 个做杂交"></div>
+  <label class="checkrow"><input type="checkbox" id="hvReplant" checked><span>♻️ 收完按同样参数再种一茬</span></label>
+  <div class="btnrow">
+    <button class="btn silent" data-close>取消</button>
+    <button class="btn primary" id="btnHvSave">记录收获</button>
+  </div>
+</div>
+
+<!-- 记录本 -->
+<div class="sheet" id="sheetLog">
+  <div class="grab"></div>
+  <h3>📖 培育记录本</h3>
+  <div class="sub">每次收获自动归档：果实 + 肥料 + 结果，方便对照哪种组合出变异</div>
+  <div id="logStats"></div>
+  <div class="flabel" style="margin-top:12px">收获流水</div>
+  <div id="logList"></div>
+  <div class="btnrow" style="margin-top:10px"><button class="btn silent" data-close>关闭</button></div>
+</div>
+
+<!-- 加入岛屿 -->
+<div class="sheet" id="sheetJoin">
+  <div class="grab"></div>
+  <h3>🏝 加入岛屿</h3>
+  <div class="sub" id="joinSub"></div>
+  <div class="frow"><div class="flabel">岛屿令牌（向岛主要）</div><input type="password" id="joinPat" placeholder="github_pat_ / ghp_ 开头" autocapitalize="off"></div>
+  <div class="frow"><div class="flabel">我的昵称（岛上显示，最多 6 字）</div><input type="text" id="joinName" maxlength="6" placeholder="例如：小A"></div>
+  <div class="frow"><div class="flabel">选个形象</div><div class="chips" id="joinEmojiChips"></div></div>
+  <div class="btnrow">
+    <button class="btn silent" id="btnJoinSkip">先逛逛（只看）</button>
+    <button class="btn primary" id="btnJoin">加入岛屿</button>
+  </div>
+  <div class="hint">令牌只保存在你手机浏览器本地。退出后想换设备，重新点邀请链接即可。</div>
 </div>
 
 <!-- 设置 -->
 <div class="sheet" id="sheetSettings">
   <div class="grab"></div>
   <h3>设置</h3>
+
   <div class="sec"></div>
+  <div class="flabel">GitHub 连接</div>
   <div class="frow"><div class="flabel">GitHub 用户名</div><input type="text" id="cfgOwner" placeholder="例如 zhangsan" autocapitalize="off"></div>
   <div class="frow"><div class="flabel">仓库名</div><input type="text" id="cfgRepo" placeholder="例如 boluo-island" autocapitalize="off"></div>
   <div class="frow"><div class="flabel">访问令牌 PAT</div><input type="password" id="cfgPat" placeholder="ghp_ / github_pat_ 开头">
-    <div class="hint">建议用 Fine-grained PAT：仅授权本仓库，权限给 Contents 读写 + Actions 读写。令牌只保存在你手机浏览器本地，不会上传。</div>
+    <div class="hint">建议用 Fine-grained PAT：仅授权本仓库，权限给 Contents 读写。令牌只保存在你手机浏览器本地，不会上传。</div>
   </div>
   <div class="btnrow" style="margin-bottom:6px"><button class="btn primary" id="btnConnect">测试并保存连接</button></div>
   <div class="hint" id="pagesHint"></div>
 
   <div class="sec"></div>
+  <div class="flabel">🏝 岛屿与成员</div>
+  <div class="frow"><div class="flabel">岛屿名称</div><input type="text" id="cfgIslandName" maxlength="10"></div>
+  <div class="frow" id="meRow"><div class="flabel">当前身份（这台手机上以谁的名义记录）</div><div class="chips" id="meChips"></div></div>
+  <div class="frow">
+    <div class="flabel">成员（菠萝岛最多 6 人同住）</div>
+    <div id="memberList"></div>
+  </div>
+  <div class="frow" id="inviteBox">
+    <div class="flabel">邀请室友</div>
+    <div class="invlink" id="inviteLink"></div>
+    <div class="btnrow" style="margin:8px 0 0"><button class="btn silent" id="btnCopyInvite">复制邀请链接</button></div>
+    <details class="steps"><summary>生成「岛屿令牌」的步骤（岛主做一次）</summary>
+      <div class="hint">1. GitHub → 右上角头像 → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token<br>
+      2. Repository access 选 <b>Only select repositories</b> → 选 boluo-island<br>
+      3. Permissions 把 <b>Contents</b> 设为 <b>Read and write</b>，其余不动<br>
+      4. 生成后复制令牌，和邀请链接一起微信发给室友<br>
+      岛屿令牌只能读写这一个仓库，不涉及其他仓库，可随时删除重发</div>
+    </details>
+    <div class="hint">岛屿码（备用，室友也可手动在设置里填）：<b id="islandCode"></b></div>
+  </div>
+
+  <div class="sec"></div>
+  <div class="flabel">🔔 我的提醒（推到我自己的微信）</div>
+  <div class="frow"><div class="flabel">提醒范围</div><div class="chips" id="scopeChips"></div></div>
+  <div class="frow"><div class="flabel">我的 Server酱 SendKey（<a href="https://sct.ftqq.com" target="_blank">sct.ftqq.com</a> 微信扫码领取）</div><input type="password" id="cfgMyKey" placeholder="SCT 开头，留空=不开个人推送">
+    <div class="hint">⚠ SendKey 会保存在仓库 data.json 里（公开），理论上他人可见；免费版每天限 5 条、可随时重置。介意就留空，只靠下面的岛播。</div>
+  </div>
+  <div class="frow"><div class="flabel">我的提前提醒</div>
+    <div class="numrow"><input type="number" id="cfgMyMin" min="0" max="720" inputmode="numeric"><span class="tunit">分钟</span></div>
+  </div>
+  <div class="btnrow"><button class="btn primary" id="btnSaveMy">保存我的提醒</button></div>
+
+  <div class="sec"></div>
+  <div class="flabel">📣 岛屿广播（推到岛主在仓库 Secrets 配置的渠道，覆盖全岛所有地块）</div>
   <div class="frow"><div class="flabel">提前提醒（成熟前多少分钟推送）</div>
     <div class="numrow"><input type="number" id="cfgRemind" min="0" max="720" inputmode="numeric"><span class="tunit">分钟</span></div>
   </div>
   <label class="checkrow"><input type="checkbox" id="cfgOnRipe"><span>成熟时刻再推送一次（已成熟，可收获）</span></label>
-  <div class="flabel" style="margin-top:8px">通知渠道（密钥配置在仓库 Settings → Secrets）</div>
+  <div class="flabel" style="margin-top:8px">广播渠道（密钥配置在仓库 Settings → Secrets）</div>
   <label class="checkrow"><input type="checkbox" id="cfgChSc"><span>Server酱（微信推送）</span></label>
   <label class="checkrow"><input type="checkbox" id="cfgChWx"><span>企业微信机器人</span></label>
   <label class="checkrow"><input type="checkbox" id="cfgChPp"><span>PushPlus（备选微信推送）</span></label>
-  <div class="btnrow" style="margin-top:8px"><button class="btn primary" id="btnSaveSettings">保存设置</button></div>
+  <div class="btnrow" style="margin-top:8px"><button class="btn primary" id="btnSaveSettings">保存岛屿广播设置</button></div>
 
   <div class="sec"></div>
   <div class="flabel">通知测试</div>
   <div class="btnrow"><button class="btn silent" id="btnTest">发送测试通知</button><button class="btn silent" id="btnCheckNow">立即检查提醒</button></div>
-  <div class="hint">提醒由 GitHub Actions 每 5 分钟自动检查一次（高峰期可能延迟几分钟）。<br>详细配置说明见仓库 README.md。</div>
+  <div class="hint">提醒由 GitHub Actions 每 5 分钟自动检查一次（高峰期可能延迟几分钟）。</div>
+
+  <div class="sec"></div>
+  <div class="flabel">📱 安装到手机桌面（像 App 一样用）</div>
+  <div class="btnrow"><button class="btn silent hidden" id="btnInstall">安装菠萝岛 App</button></div>
+  <div class="hint" id="iosHint" style="display:none">iPhone：用 Safari 打开本页 → 底部「分享」按钮 → 滚动选「添加到主屏幕」</div>
+  <div class="hint" id="androidHint">安卓 Chrome：菜单 →「安装应用」/「添加到主屏幕」</div>
 
   <div class="btnrow" style="margin-top:14px"><button class="btn silent" data-close>关闭</button></div>
 </div>
@@ -279,13 +412,18 @@ const FRUIT_MIN={'杨桃':60,'榴莲':60,'柠檬':15,'香蕉':15,'石榴':15,'�
 const FERTS=['无','重量化肥','变异化肥','促熟化肥'];
 const EMOJI={'杨桃':'⭐','榴莲':'🍈','柠檬':'🍋','香蕉':'🍌','石榴':'🍎','草莓':'🍓','山竹':'🍇','火龙果':'🐉','牛油果':'🥑'};
 const QUICK=[[0,15,'15分钟'],[1,0,'1小时'],[2,0,'2小时'],[4,0,'4小时'],[16,0,'16小时'],[24,0,'24小时']];
+const MEMBER_EMOJIS=['👑','🐱','🐶','🐰','🦊','🐻','🐼','🐸','🐵','🦉','🐙','🦋'];
+const RESULTS=['普通收获','重量提升','变异·彩虹果','变异·其他'];
+const SCOPES=['只提醒自己','全岛提醒','不提醒'];
 const LS_CFG='boluo_cfg',LS_DATA='boluo_data';
 let cfg={};try{cfg=JSON.parse(localStorage.getItem(LS_CFG)||'{}')}catch(e){cfg={}}
 let data=null;
-let viewId=null,editIds=[],timeMode='remain',selFruit=null,selFert=null;
+let viewId=null,editIds=[],timeMode='remain',selFruit=null,selFert=null,selOwner=null;
 let batchMode=false,dragSel=null;
+let hvTarget=null,selRes=null,myScope='全岛提醒';
+let joinOwner=null,joinRepo=null,joinEmoji='🐱';
 const selectedSet=new Set();
-let lastFetch=0,toastTimer=null,hadLocalData=false;
+let lastFetch=0,toastTimer=null,hadLocalData=false,deferredPrompt=null;
 
 /* ================= 工具函数 ================= */
 const $=s=>document.querySelector(s);
@@ -293,6 +431,8 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const pad=n=>String(n).padStart(2,'0');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const byId=id=>(data.plots||[]).find(p=>p.id===id);
+const memberOf=id=>(data.members||[]).find(m=>m.id===id);
+const me=()=>memberOf(cfg.meId)||(data.members||[])[0]||null;
 function connected(){return !!(cfg.owner&&cfg.repo)}
 function toast(msg,err){const t=$('#toast');t.textContent=msg;t.className='show'+(err?' err':'');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.className='',2600)}
 function b64enc(str){const bytes=new TextEncoder().encode(str);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
@@ -315,12 +455,47 @@ function fmtCompact(ms){
 }
 function emojiOf(f){return EMOJI[f]||(f?'🌱':'')}
 function toLocalInput(ms){const d=new Date(ms);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)}
+function memberColor(id){let h=0;for(const c of String(id))h=(h*31+c.charCodeAt(0))%360;return 'hsl('+h+',62%,42%)'}
+function ownerBadge(id){const m=memberOf(id);if(!m)return '';return '<i class="ow" style="color:'+memberColor(m.id)+'">'+esc(m.name.slice(0,1))+'</i>'}
+
+/* ================= 数据模型 v3 与迁移 ================= */
+function emptyPlot(id,name){return{id,name,fruit:'',fertilizer:'无',note:'',plantedAt:null,ripenAt:null,owner:'',
+  notified:{soon:[],ripe:[]},harvestCount:0,lastHarvestAt:null,lastFruit:'',lastFert:'',lastDur:null}}
 function defaultData(){
   const plots=[];
   for(let r=1;r<=ROWS;r++)for(let c=1;c<=COLS;c++)plots.push(emptyPlot('g'+r+'c'+c,r+'-'+c));
-  return{version:2,settings:{remindMinutes:15,notifyOnRipe:true,channels:{serverchan:true,wecom:true,pushplus:false}},plots};
+  return{version:3,island:{name:'我们的菠萝岛'},
+    settings:{remindMinutes:15,notifyOnRipe:true,channels:{serverchan:true,wecom:true,pushplus:false}},
+    members:[{id:'m1',name:'岛主',emoji:'👑',notify:'全岛提醒',nk:'',remindMinutes:15}],plots,history:[]};
 }
-function emptyPlot(id,name){return{id,name,fruit:'',fertilizer:'无',note:'',plantedAt:null,ripenAt:null,notifiedSoon:false,notifiedRipe:false,harvestCount:0,lastHarvestAt:null}}
+function migrate(d){
+  if(!d||!Array.isArray(d.plots))d=defaultData();
+  d.settings=Object.assign({remindMinutes:15,notifyOnRipe:true,channels:{serverchan:true,wecom:true,pushplus:false}},d.settings||{});
+  d.island=d.island&&d.island.name?d.island:{name:'我们的菠萝岛'};
+  if(!Array.isArray(d.members)||!d.members.length){
+    d.members=[{id:'m1',name:'岛主',emoji:'👑',notify:'全岛提醒',nk:'',remindMinutes:d.settings.remindMinutes}];
+    d.plots.forEach(p=>{if(p.ripenAt&&!p.owner)p.owner='m1'});
+  }
+  d.members=d.members.map(m=>({id:m.id||'m1',name:m.name||'岛友',emoji:m.emoji||'🐱',
+    notify:m.notify||'全岛提醒',nk:m.nk||'',remindMinutes:m.remindMinutes==null?d.settings.remindMinutes:m.remindMinutes}));
+  d.plots=d.plots.map(p=>{
+    const n=p.notified;
+    if(!(n&&Array.isArray(n.soon)&&Array.isArray(n.ripe))){
+      const soon=Array.isArray(n&&n.soon)?n.soon:(p.notifiedSoon?['bc']:[]);
+      const ripe=Array.isArray(n&&n.ripe)?n.ripe:(p.notifiedRipe?['bc']:[]);
+      p.notified={soon,ripe};
+      delete p.notifiedSoon;delete p.notifiedRipe;
+    }
+    if(p.owner==null)p.owner='';
+    if(p.lastFruit==null)p.lastFruit='';
+    if(p.lastFert==null)p.lastFert='无';
+    if(p.lastDur==null)p.lastDur=null;
+    return p;
+  });
+  if(!Array.isArray(d.history))d.history=[];
+  d.version=3;
+  return d;
+}
 function statusOf(p){
   if(!p.ripenAt)return'empty';
   const t=p.ripenAt-Date.now(),r=(data.settings.remindMinutes||0)*60000;
@@ -348,7 +523,7 @@ async function ghFetch(path,opts={}){
 async function loadDataFromGH(){
   const r=await ghFetch(`/repos/${cfg.owner}/${cfg.repo}/contents/data.json`);
   const j=await r.json();
-  const d=JSON.parse(b64dec(j.content));
+  const d=migrate(JSON.parse(b64dec(j.content)));
   d._sha=j.sha;
   return d;
 }
@@ -388,7 +563,17 @@ async function saveEdits(ch){
       plots=plots.map(sp=>(ch.edited||[]).includes(sp.id)&&localById.has(sp.id)?localById.get(sp.id):sp);
       for(const lp of data.plots){if(!plots.some(p=>p.id===lp.id))plots.push(lp)}
       server.plots=plots;
+      if(ch.members)server.members=data.members;
       if(ch.settings)server.settings=data.settings;
+      if(ch.island)server.island=data.island;
+      if(ch.history){
+        const merged=(server.history||[]).slice();
+        for(const h of data.history){
+          if(!merged.some(x=>x.ts===h.ts&&x.plotName===h.plotName&&x.fruit===h.fruit))merged.push(h);
+        }
+        merged.sort((a,b)=>a.ts-b.ts);
+        server.history=merged.slice(-400);
+      }
       const saved=await putDataToGH(server);
       saved.updatedAt=Date.now();
       data=saved;cacheData();lastFetch=Date.now();
@@ -406,14 +591,14 @@ async function refresh(silent){
   try{
     const server=await loadDataFromGH();
     data=server;cacheData();lastFetch=Date.now();
+    if(!cfg.meId||!memberOf(cfg.meId))cfg.meId=(data.members[0]||{}).id;
     if(hadLocalData&&!(data.plots||[]).some(p=>p.ripenAt)){
       const localCopy=JSON.parse(localStorage.getItem(LS_DATA)||'null');
       if(localCopy&&(localCopy.plots||[]).some(p=>p.ripenAt)&&confirm('检测到本机有未上传的种植数据，是否上传到 GitHub？')){
         const byIdMap=new Map(localCopy.plots.map(p=>[p.id,p]));
         data.plots=data.plots.map(p=>byIdMap.get(p.id)&&byIdMap.get(p.id).ripenAt?byIdMap.get(p.id):p);
-        data.settings=localCopy.settings;
         hadLocalData=false;
-        await saveEdits({edited:data.plots.filter(p=>p.ripenAt).map(p=>p.id),settings:true});
+        await saveEdits({edited:data.plots.filter(p=>p.ripenAt).map(p=>p.id)});
         toast('本地数据已上传 ✓');return;
       }
     }
@@ -431,9 +616,10 @@ function renderAll(){renderHeader();renderBanner();renderGrid();renderSummary();
 
 function renderHeader(){
   const el=$('#syncInfo');
-  if(!connected()){el.textContent='本地模式（未连接 GitHub）';return}
+  document.title='🍍 '+data.island.name;
+  if(!connected()){el.textContent=data.island.name+' · 本地模式（未连接 GitHub）';return}
   const t=lastFetch?fmtHM(lastFetch):'--:--';
-  el.textContent='GitHub · 更新于 '+t+(cfg.pat?'':' · 只读（未配置PAT）');
+  el.textContent=data.island.name+' · 更新于 '+t+(cfg.pat?'':' · 只读（未配置PAT）');
 }
 function renderBanner(){
   const b=$('#setupBanner');
@@ -454,7 +640,7 @@ function renderSummary(){
   (data.plots||[]).forEach(p=>st[statusOf(p)]++);
   $('#counts').innerHTML=
     `<span class="cnt ripe">已成熟 <b>${st.ripe}</b></span>`+
-    `<span class="cnt soon">即将成熟 <b>${st.soon}</b></span>`+
+    `<span class="cnt soon">快熟了 <b>${st.soon}</b></span>`+
     `<span class="cnt grow">生长中 <b>${st.growing}</b></span>`+
     `<span class="cnt">未种植 <b>${st.empty}</b></span>`;
 }
@@ -469,20 +655,23 @@ function tick(){
     if(p.ripenAt){
       const left=p.ripenAt-now;
       const fert=p.fertilizer&&p.fertilizer!=='无'?'<i class="fdot"></i>':'';
-      cell.querySelector('.ce').innerHTML=emojiOf(p.fruit)+fert;
+      const ow=(data.members||[]).length>1?ownerBadge(p.owner):'';
+      cell.querySelector('.ce').innerHTML=ow+emojiOf(p.fruit)+fert;
       cell.querySelector('.cd').textContent=left<=0?'熟':fmtCompact(left);
       if(!next||p.ripenAt<next.ripenAt)next=p;
     }else{
       cell.querySelector('.ce').innerHTML='';
-      cell.querySelector('.cd').textContent='＋';
+      cell.querySelector('.cd').textContent=(p.lastFruit?'♻':'＋');
     }
     cell.querySelector('.cl').textContent=(p.note?'✎':'')+p.name;
   });
   if(next){
     const left=next.ripenAt-now;
+    const own=(data.members||[]).length>1&&next.owner?memberOf(next.owner):null;
+    const who=own?('（'+own.emoji+esc(own.name)+'）'):'';
     $('#nextLine').innerHTML=left<=0
-      ?`下一个成熟：<b>${esc(next.name)} · ${esc(next.fruit)}</b><span class="ncd">已成熟，快去收获</span>`
-      :`下一个成熟：<b>${esc(next.name)} · ${esc(next.fruit)}</b>（${fmtAt(next.ripenAt)}）<span class="ncd">剩 ${cdText(left)}</span>`;
+      ?`下一个成熟：<b>${esc(next.name)} · ${esc(next.fruit)}</b>${who}<span class="ncd">已成熟，快去收获</span>`
+      :`下一个成熟：<b>${esc(next.name)} · ${esc(next.fruit)}</b>${who}（${fmtAt(next.ripenAt)}）<span class="ncd">剩 ${cdText(left)}</span>`;
   }else{
     $('#nextLine').innerHTML='<span style="color:#b9ab7d">暂无种植中的果实，点空地块或用批量模式开始录入</span>';
   }
@@ -495,8 +684,40 @@ function tick(){
       $('#vMeta').textContent=left<=0?'已于 '+fmtAt(p.ripenAt)+' 成熟，快去收获':'预计 '+fmtAt(p.ripenAt)+' 成熟（北京时间）';
     }
   }
+  tickWidget(now);
 }
 setInterval(tick,1000);
+
+/* ---- 挂件模式 ---- */
+function tickWidget(now){
+  const w=$('#widget');
+  if(!cfg.widget||w.classList.contains('hidden'))return;
+  const planted=(data.plots||[]).filter(p=>p.ripenAt);
+  const st={soon:0,ripe:0,growing:0};
+  planted.forEach(p=>{const s=statusOf(p);if(st[s]!=null)st[s]++});
+  let next=null;planted.forEach(p=>{if(!next||p.ripenAt<next.ripenAt)next=p});
+  $('#wCounts').innerHTML=`<span class="wc r">熟 ${st.ripe}</span><span class="wc s">快熟 ${st.soon}</span><span class="wc g">长 ${st.growing}</span>`;
+  $('#wBubble').innerHTML=navigator.onLine
+    ?(next?(next.ripenAt-now<=0
+        ?`${emojiOf(next.fruit)} <b>${esc(next.fruit)}</b> 已成熟，快收！`
+        :`${emojiOf(next.fruit)} <b>${esc(next.fruit)}</b> 剩 <b>${cdText(next.ripenAt-now)}</b>`)
+      :'岛上空空的～<br>点一下屏幕回去种点啥')
+    :'📶 离线中，展示的是上次数据';
+}
+function enterWidget(on){
+  cfg.widget=!!on;
+  localStorage.setItem(LS_CFG,JSON.stringify(cfg));
+  document.body.classList.toggle('widgetmode',cfg.widget);
+  $('#widget').classList.toggle('hidden',!cfg.widget);
+  tickWidget(Date.now());
+}
+$('#btnWidget').onclick=()=>enterWidget(!cfg.widget);
+$('#widget').onclick=()=>enterWidget(false);
+(function(){
+  const img=new Image();
+  img.onload=()=>{const box=$('#wPetBox');box.innerHTML='';img.alt='pet';box.appendChild(img)};
+  img.src='pet.png';
+})();
 
 /* ================= 弹层 ================= */
 function openSheet(id){
@@ -517,7 +738,8 @@ document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeSheets);
 /* ---- chips 渲染 ---- */
 function renderChips(box,items,selected,onPick,customInput){
   box.innerHTML='';
-  [...items,'自定义'].forEach(it=>{
+  const list=customInput?[...items,'自定义']:items;
+  list.forEach(it=>{
     const isOn=it==='自定义'?(selected==='__custom'):(selected===it);
     const c=document.createElement('button');
     c.className='chip'+(isOn?' on':'');c.textContent=it;
@@ -564,6 +786,16 @@ function pickFert(v){
   if(v!=='__custom')$('#inFert').value='';
   else setTimeout(()=>$('#inFert').focus(),50);
 }
+function renderOwnerChips(){
+  const box=$('#ownerChips');box.innerHTML='';
+  (data.members||[]).forEach(m=>{
+    const c=document.createElement('button');
+    c.className='chip'+(selOwner===m.id?' on':'');
+    c.textContent=m.emoji+' '+m.name;
+    c.onclick=()=>{selOwner=m.id;renderOwnerChips()};
+    box.appendChild(c);
+  });
+}
 QUICK.forEach(([h,m,label])=>{
   const c=document.createElement('button');
   c.className='chip';c.textContent=label;
@@ -595,17 +827,27 @@ function openPlotSheet(ids){
     :(p.ripenAt?('编辑 · '+p.name):('在 '+p.name+' 种植'));
   $('#nameRow').classList.toggle('hidden',batch);
   $('#noteRow').classList.toggle('hidden',batch);
+  $('#ownerRow').classList.toggle('hidden',(data.members||[]).length<2);
   $('#inName').value=p.name;
-  selFruit=FRUITS.includes(p.fruit)?p.fruit:(p.fruit?'__custom':null);
-  $('#inFruit').value=selFruit==='__custom'?p.fruit:'';
+  const srcFruit=(p.ripenAt||!p.lastFruit)?p.fruit:p.lastFruit;
+  const srcFert=(p.ripenAt||!p.lastFert||p.lastFert==='')?p.fertilizer:p.lastFert;
+  selFruit=FRUITS.includes(srcFruit)?srcFruit:(srcFruit?'__custom':null);
+  $('#inFruit').value=selFruit==='__custom'?srcFruit:'';
   renderFruitChips();
-  selFert=FERTS.includes(p.fertilizer)?p.fertilizer:(p.fertilizer?'__custom':'无');
-  $('#inFert').value=selFert==='__custom'?p.fertilizer:'';
+  selFert=FERTS.includes(srcFert)?srcFert:(srcFert&&srcFert!=='无'?'__custom':'无');
+  $('#inFert').value=selFert==='__custom'?srcFert:'';
   renderChips($('#fertChips'),FERTS,selFert,pickFert,$('#inFert'));
+  selOwner=(p.owner&&memberOf(p.owner)&&!batch)?p.owner:(cfg.meId||(data.members[0]||{}).id);
+  renderOwnerChips();
   $('#inRemH').value='';$('#inRemM').value='';
   $('#inDurH').value='';$('#inDurM').value='';
   $('#inPlanted').value=toLocalInput(Date.now());
   $('#inNote').value=p.note||'';
+  const lh=$('#lastHint');
+  if(!p.ripenAt&&p.lastFruit){
+    lh.textContent='♻️ 已预填上次参数：'+p.lastFruit+(p.lastFert&&p.lastFert!=='无'?' · '+p.lastFert:'')+'，直接点保存即可再种一茬';
+    lh.classList.remove('hidden');
+  }else lh.classList.add('hidden');
   setTab(batch||!p.ripenAt?'fresh':'remain');
   openSheet('sheetPlot');
 }
@@ -634,7 +876,7 @@ $('#btnPlotSave').onclick=()=>{
   const edited=[];
   for(const id of editIds){
     const p=byId(id);if(!p)continue;
-    const upd={fruit,fertilizer:fert||'无',ripenAt,notifiedSoon:false,notifiedRipe:false};
+    const upd={fruit,fertilizer:fert||'无',ripenAt,owner:selOwner||cfg.meId,notified:{soon:[],ripe:[]}};
     upd.plantedAt=timeMode==='remain'?p.plantedAt:plantedAt;
     if(!batch){
       upd.name=$('#inName').value.trim()||p.name;
@@ -662,6 +904,8 @@ function openViewSheet(id){
   const p=byId(id);if(!p||!p.ripenAt)return;
   $('#vName').textContent=p.name+' · '+p.fruit;
   const tags=[];
+  const m=memberOf(p.owner);
+  if(m)tags.push(m.emoji+' '+esc(m.name));
   if(p.fertilizer&&p.fertilizer!=='无')tags.push('🌱 '+esc(p.fertilizer));
   if(p.plantedAt)tags.push('种于 '+fmtAt(p.plantedAt));
   $('#vTags').innerHTML=tags.map(t=>`<span class="vtag">${t}</span>`).join('')||'<span class="vtag">📝 暂无附加信息</span>';
@@ -672,13 +916,87 @@ function openViewSheet(id){
   openSheet('sheetView');
 }
 $('#btnEditInfo').onclick=()=>{if(viewId)openPlotSheet([viewId])};
-$('#btnHarvest').onclick=()=>{
+$('#btnClearOnly').onclick=()=>{
   const p=byId(viewId);if(!p)return;
-  p.fruit='';p.fertilizer='无';p.note='';p.plantedAt=null;p.ripenAt=null;
-  p.notifiedSoon=false;p.notifiedRipe=false;p.harvestCount=(p.harvestCount||0)+1;p.lastHarvestAt=Date.now();
+  if(!confirm('仅清空 '+p.name+'（不记入记录本）？'))return;
+  clearPlotRecord(p);
   closeSheets();
   saveEdits({edited:[p.id]});
-  toast('已记录收获，地块可重新种植 🌱');
+  toast('已清空，地块可重新种植 🌱');
+};
+
+/* ---- 收获 / 再种 ---- */
+function clearPlotRecord(p){
+  p.lastFruit=p.fruit||'';
+  p.lastFert=p.fertilizer||'无';
+  p.lastDur=(p.ripenAt&&p.plantedAt)?Math.max(1,Math.round((p.ripenAt-p.plantedAt)/60000)):null;
+  p.fruit='';p.fertilizer='无';p.note='';p.plantedAt=null;p.ripenAt=null;
+  p.notified={soon:[],ripe:[]};
+  p.harvestCount=(p.harvestCount||0)+1;p.lastHarvestAt=Date.now();
+}
+function replantPlot(p){
+  const dur=p.lastDur||(FRUIT_MIN[p.lastFruit]||60);
+  p.fruit=p.lastFruit;p.fertilizer=p.lastFert||'无';
+  p.plantedAt=Date.now();p.ripenAt=Date.now()+dur*60000;
+  p.owner=cfg.meId||p.owner;
+  p.notified={soon:[],ripe:[]};
+}
+function pushHistory(p,result,note){
+  data.history.push({ts:Date.now(),member:p.owner||cfg.meId||'',plotName:p.name,fruit:p.fruit,
+    fertilizer:p.fertilizer,result:result||'',note:note||''});
+  if(data.history.length>400)data.history=data.history.slice(-400);
+}
+function openHarvest(id,replantDefault){
+  hvTarget=id;
+  const p=byId(id);if(!p)return;
+  $('#hvSub').textContent=p.name+' · '+p.fruit+(p.fertilizer&&p.fertilizer!=='无'?' · '+p.fertilizer:'');
+  selRes='普通收获';
+  const renderRes=()=>renderChips($('#hvResChips'),RESULTS,selRes,v=>{selRes=v;renderRes()},$('#hvResInput'));
+  renderRes();
+  $('#hvResInput').value='';
+  $('#hvNote').value='';
+  $('#hvReplant').checked=replantDefault!==false;
+  openSheet('sheetHarvest');
+}
+$('#btnHarvest').onclick=()=>{if(viewId)openHarvest(viewId,true)};
+$('#btnHvSave').onclick=()=>{
+  const p=byId(hvTarget);if(!p)return;
+  const res=selRes==='__custom'?($('#hvResInput').value.trim()||'普通收获'):selRes;
+  pushHistory(p,res,$('#hvNote').value.trim());
+  const replant=$('#hvReplant').checked;
+  clearPlotRecord(p);
+  if(replant)replantPlot(p);
+  closeSheets();
+  saveEdits({edited:[p.id],history:true});
+  toast(replant?'已记录收获，并按上次参数再种 🌱':'已记录收获 ✓');
+};
+
+/* ---- 记录本 ---- */
+$('#btnLog').onclick=()=>{
+  const hist=(data.history||[]).slice().reverse();
+  const groups={};
+  hist.forEach(h=>{
+    if(!h.result)return;
+    const key=h.fruit+((h.fertilizer&&h.fertilizer!=='无')?'·'+h.fertilizer:'');
+    (groups[key]=groups[key]||{}).counts=(groups[key].counts||{});
+    groups[key].counts[h.result]=(groups[key].counts[h.result]||0)+1;
+    groups[key].total=(groups[key].total||0)+1;
+  });
+  const keys=Object.keys(groups).sort((a,b)=>groups[b].total-groups[a].total);
+  $('#logStats').innerHTML=keys.length
+    ?keys.map(k=>{
+      const cs=Object.entries(groups[k].counts).map(([r,n])=>r+' '+n).join(' · ');
+      return `<div class="statcard"><b>${esc(k)}</b>：共 ${groups[k].total} 次收获<br>${esc(cs)}</div>`;
+    }).join('')
+    :'<div class="hint">还没有记录过收获结果。收获时选「记录收获」并填写结果，这里就能对照哪种果实+化肥更容易出变异。</div>';
+  $('#logList').innerHTML=hist.length
+    ?hist.slice(0,60).map(h=>{
+      const m=memberOf(h.member);
+      const who=m?(m.emoji+' '+esc(m.name)+' '):'';
+      return `<div class="logrow"><span class="lt">${fmtAt(h.ts)}</span><div class="lb">${who}${esc(h.plotName)} · ${esc(h.fruit)}${(h.fertilizer&&h.fertilizer!=='无')?'（'+esc(h.fertilizer)+'）':''} → <span class="res">${h.result?esc(h.result):'未记录'}</span>${h.note?'<br><span style="color:#a09884">'+esc(h.note)+'</span>':''}</div></div>`;
+    }).join('')+(hist.length>60?'<div class="hint" style="text-align:center">仅显示最近 60 条</div>':'')
+    :'<div class="hint">暂无收获记录</div>';
+  openSheet('sheetLog');
 };
 
 /* ---- 批量模式：拖动滑选 ---- */
@@ -721,61 +1039,201 @@ $('#btnSelPlant').onclick=()=>{
   if(!selectedSet.size){toast('先拖动选择地块',true);return}
   openPlotSheet([...selectedSet]);
 };
+$('#btnSelReplant').onclick=()=>{
+  const ids=[...selectedSet].filter(id=>{const p=byId(id);return p&&p.ripenAt});
+  if(!ids.length){toast('请选择已种植的地块',true);return}
+  if(!confirm('把 '+ids.length+' 块地按原参数收完再种（收获结果记为未记录）？'))return;
+  const edited=[];
+  for(const id of ids){
+    const p=byId(id);
+    pushHistory(p,'','批量连种');
+    clearPlotRecord(p);
+    replantPlot(p);
+    edited.push(id);
+  }
+  setBatch(false);
+  saveEdits({edited,history:true});
+  toast('已再种 '+edited.length+' 块 🌱');
+};
 $('#btnSelClear').onclick=()=>{
   if(!selectedSet.size){toast('先拖动选择地块',true);return}
-  if(!confirm('清空所选 '+selectedSet.size+' 块地的果实？（相当于批量收获）'))return;
+  if(!confirm('清空所选 '+selectedSet.size+' 块地的果实？（相当于批量收获，结果记为未记录）'))return;
   const edited=[];
   for(const id of selectedSet){
     const p=byId(id);if(!p)continue;
-    if(p.ripenAt){p.harvestCount=(p.harvestCount||0)+1;p.lastHarvestAt=Date.now()}
-    Object.assign(p,{fruit:'',fertilizer:'无',note:'',plantedAt:null,ripenAt:null,notifiedSoon:false,notifiedRipe:false});
+    if(p.ripenAt)pushHistory(p,'','批量清空');
+    clearPlotRecord(p);
     edited.push(id);
   }
-  saveEdits({edited});
+  setBatch(false);
+  saveEdits({edited,history:true});
   toast('已清空 '+edited.length+' 块地 🌱');
 };
 
+/* ---- 加入岛屿 ---- */
+function openJoinSheet(){
+  $('#joinSub').textContent='岛屿：'+joinOwner+' / '+joinRepo+'（邀请链接打开）';
+  const box=$('#joinEmojiChips');box.innerHTML='';
+  MEMBER_EMOJIS.forEach(e=>{
+    const c=document.createElement('button');
+    c.className='chip'+(joinEmoji===e?' on':'');c.textContent=e;
+    c.onclick=()=>{joinEmoji=e;openJoinSheet()};
+    box.appendChild(c);
+  });
+  openSheet('sheetJoin');
+}
+$('#btnJoinSkip').onclick=()=>{
+  cfg={owner:joinOwner,repo:joinRepo,pat:'',branch:cfg.branch||'main',meId:cfg.meId};
+  localStorage.setItem(LS_CFG,JSON.stringify(cfg));
+  location.hash='';
+  location.reload();
+};
+$('#btnJoin').onclick=async()=>{
+  const pat=$('#joinPat').value.trim();
+  const name=$('#joinName').value.trim();
+  if(!pat){toast('请粘贴岛屿令牌',true);return}
+  if(!name){toast('请填写昵称',true);return}
+  const btn=$('#btnJoin');btn.disabled=true;btn.textContent='加入中…';
+  const headers={'Accept':'application/vnd.github+json',Authorization:'Bearer '+pat};
+  try{
+    const r1=await fetch(`${API}/repos/${joinOwner}/${joinRepo}`,{headers});
+    if(r1.status===401)throw new Error('岛屿令牌无效（401）');
+    if(!r1.ok)throw new Error('岛屿不存在或无法访问（'+r1.status+'）');
+    const j1=await r1.json();
+    const r2=await fetch(`${API}/repos/${joinOwner}/${joinRepo}/contents/data.json`,{headers});
+    if(!r2.ok)throw new Error('读取岛屿数据失败（'+r2.status+'）');
+    const j2=await r2.json();
+    const remote=migrate(JSON.parse(b64dec(j2.content)));
+    remote._sha=j2.sha;
+    if((remote.members||[]).length>=6)throw new Error('岛屿成员已满（最多 6 人）');
+    if(remote.members.some(m=>m.name===name))throw new Error('昵称「'+name+'」已被使用，换一个吧');
+    const id='m'+Date.now().toString(36);
+    remote.members.push({id,name,emoji:joinEmoji,notify:'全岛提醒',nk:'',remindMinutes:remote.settings.remindMinutes});
+    cfg={owner:joinOwner,repo:joinRepo,pat,branch:j1.default_branch||'main',meId:id};
+    localStorage.setItem(LS_CFG,JSON.stringify(cfg));
+    data=remote;cacheData();
+    await putDataToGH(remote);
+    toast('欢迎加入 '+remote.island.name+' 🎉');
+    setTimeout(()=>{location.hash='';location.reload()},800);
+  }catch(e){
+    toast('加入失败：'+e.message,true);
+    btn.disabled=false;btn.textContent='加入岛屿';
+  }
+};
+
 /* ---- 设置 sheet ---- */
-$('#btnSettings').onclick=()=>{
+function renderSettings(){
   $('#cfgOwner').value=cfg.owner||'';
   $('#cfgRepo').value=cfg.repo||'';
   $('#cfgPat').value=cfg.pat||'';
+  $('#cfgIslandName').value=data.island.name;
+  const multi=(data.members||[]).length>1;
+  $('#meRow').classList.toggle('hidden',!multi);
+  if(multi){
+    const box=$('#meChips');box.innerHTML='';
+    data.members.forEach(m=>{
+      const c=document.createElement('button');
+      c.className='chip'+(cfg.meId===m.id?' on':'');
+      c.textContent=m.emoji+' '+m.name;
+      c.onclick=()=>{cfg.meId=m.id;localStorage.setItem(LS_CFG,JSON.stringify(cfg));renderSettings()};
+      box.appendChild(c);
+    });
+  }
+  $('#memberList').innerHTML=(data.members||[]).map(m=>
+    `<div class="mrow"><span>${esc(m.emoji)} ${esc(m.name)}${m.id==='m1'?' <span class="hint" style="display:inline">· 岛主</span>':''}</span>`+
+    (m.id!=='m1'?`<button class="mini" data-del="${m.id}">移除</button>`:'')+'</div>'
+  ).join('')||'<div class="hint">暂无成员</div>';
+  document.querySelectorAll('#memberList [data-del]').forEach(b=>b.onclick=()=>removeMember(b.dataset.del));
+  const m=me()||{};
+  myScope=SCOPES.includes(m.notify)?m.notify:'全岛提醒';
+  renderScopeChips();
+  $('#cfgMyKey').value=m.nk||'';
+  $('#cfgMyMin').value=m.remindMinutes!=null?m.remindMinutes:data.settings.remindMinutes;
   $('#cfgRemind').value=data.settings.remindMinutes;
   $('#cfgOnRipe').checked=!!data.settings.notifyOnRipe;
   const ch=data.settings.channels||{};
   $('#cfgChSc').checked=ch.serverchan!==false;
   $('#cfgChWx').checked=ch.wecom!==false;
   $('#cfgChPp').checked=!!ch.pushplus;
-  $('#pagesHint').innerHTML=connected()?('网页地址：<a href="https://'+cfg.owner+'.github.io/'+cfg.repo+'/" target="_blank">https://'+cfg.owner+'.github.io/'+cfg.repo+'/</a>'):'';
-  openSheet('sheetSettings');
-};
+  if(connected()){
+    $('#inviteLink').textContent='https://'+cfg.owner+'.github.io/'+cfg.repo+'/#join='+cfg.owner+'/'+cfg.repo;
+    $('#islandCode').textContent=cfg.owner+'/'+cfg.repo;
+    $('#pagesHint').innerHTML='网页地址：<a href="https://'+cfg.owner+'.github.io/'+cfg.repo+'/" target="_blank">https://'+cfg.owner+'.github.io/'+cfg.repo+'/</a>';
+  }else{
+    $('#inviteLink').textContent='连接 GitHub 后生成';
+    $('#islandCode').textContent='—';
+    $('#pagesHint').innerHTML='';
+  }
+}
+function renderScopeChips(){
+  const box=$('#scopeChips');box.innerHTML='';
+  SCOPES.forEach(s=>{
+    const c=document.createElement('button');
+    c.className='chip'+(myScope===s?' on':'');c.textContent=s;
+    c.onclick=()=>{myScope=s;renderScopeChips()};
+    box.appendChild(c);
+  });
+}
+function removeMember(id){
+  const m=memberOf(id);if(!m)return;
+  if(!confirm('移除成员 '+m.name+'？其已种地块将变为无主。'))return;
+  data.members=data.members.filter(x=>x.id!==id);
+  const edited=[];
+  (data.plots||[]).forEach(p=>{if(p.owner===id){p.owner='';edited.push(p.id)}});
+  if(cfg.meId===id){cfg.meId=(data.members[0]||{}).id;localStorage.setItem(LS_CFG,JSON.stringify(cfg))}
+  saveEdits({members:true,edited});
+  renderSettings();
+  toast('已移除 '+m.name);
+}
+$('#btnSettings').onclick=()=>{renderSettings();openSheet('sheetSettings')};
 $('#btnConnect').onclick=async()=>{
   const owner=$('#cfgOwner').value.trim(),repo=$('#cfgRepo').value.trim(),pat=$('#cfgPat').value.trim();
   if(!owner||!repo){toast('请填写用户名和仓库名',true);return}
   const btn=$('#btnConnect');btn.disabled=true;btn.textContent='测试中…';
   const backup=JSON.stringify(cfg);
-  cfg={owner,repo,pat,branch:cfg.branch};
+  cfg={owner,repo,pat,branch:cfg.branch,meId:cfg.meId};
   try{
     const r1=await ghFetch(`/repos/${owner}/${repo}`);
     const j1=await r1.json();cfg.branch=j1.default_branch||'main';
     await ghFetch(`/repos/${owner}/${repo}/contents/data.json`);
     localStorage.setItem(LS_CFG,JSON.stringify(cfg));
     toast('连接成功 ✓ 正在拉取数据…');
-    $('#pagesHint').innerHTML='网页地址：<a href="https://'+owner+'.github.io/'+repo+'/" target="_blank">https://'+owner+'.github.io/'+repo+'/</a><br>默认分支：'+cfg.branch;
+    renderSettings();
     await refresh(true);
+    renderSettings();
   }catch(e){
     cfg=JSON.parse(backup);
     toast('连接失败：'+e.message,true);
   }
   btn.disabled=false;btn.textContent='测试并保存连接';
 };
+$('#btnSaveMy').onclick=()=>{
+  const m=me();if(!m)return;
+  m.notify=myScope;
+  m.nk=$('#cfgMyKey').value.trim();
+  m.remindMinutes=Math.max(0,Math.min(720,+$('#cfgMyMin').value||0));
+  saveEdits({members:true});
+  toast('我的提醒已保存 '+(connected()?'并同步 ✓':'（本地模式）'));
+};
 $('#btnSaveSettings').onclick=()=>{
+  data.island.name=$('#cfgIslandName').value.trim()||'我们的菠萝岛';
   const rm=Math.max(0,Math.min(720,+$('#cfgRemind').value||0));
   data.settings.remindMinutes=rm;
   data.settings.notifyOnRipe=$('#cfgOnRipe').checked;
   data.settings.channels={serverchan:$('#cfgChSc').checked,wecom:$('#cfgChWx').checked,pushplus:$('#cfgChPp').checked};
-  saveEdits({settings:true});
+  saveEdits({settings:true,island:true});
+  renderHeader();
   toast('设置已保存 '+(connected()?'并同步 ✓':'（本地模式）'));
+};
+$('#btnCopyInvite').onclick=async()=>{
+  const link=$('#inviteLink').textContent;
+  if(!/^https/.test(link)){toast('请先连接 GitHub',true);return}
+  try{await navigator.clipboard.writeText(link)}
+  catch(e){
+    const ta=document.createElement('textarea');ta.value=link;document.body.appendChild(ta);
+    ta.select();document.execCommand('copy');ta.remove();
+  }
+  toast('邀请链接已复制 ✓ 发给室友吧');
 };
 async function runDispatch(test){
   if(!connected()||!cfg.pat){toast('需要先配置 GitHub 连接和 PAT',true);return}
@@ -795,21 +1253,48 @@ $('#btnRefresh').onclick=()=>refresh(false);
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='visible'&&connected()&&Date.now()-lastFetch>60000)refresh(true);
 });
+setInterval(()=>{
+  if(connected()&&document.visibilityState==='visible'&&Date.now()-lastFetch>150000)refresh(true);
+},60000);
+
+/* ---- PWA ---- */
+if('serviceWorker' in navigator&&location.protocol==='https:'){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();deferredPrompt=e;
+  $('#btnInstall').classList.remove('hidden');
+});
+$('#btnInstall').onclick=async()=>{
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  deferredPrompt=null;
+  $('#btnInstall').classList.add('hidden');
+};
+if(/iphone|ipad|ipod/i.test(navigator.userAgent)){
+  $('#iosHint').style.display='block';
+  $('#androidHint').style.display='none';
+}
 
 /* ================= 初始化 ================= */
 (function init(){
-  if(!cfg.owner&&location.host.endsWith('.github.io')){
+  const jm=location.hash.match(/^#join=([\w.-]+)\/([\w.-]+)$/);
+  if(jm){joinOwner=jm[1];joinRepo=jm[2]}
+  if(!joinOwner&&!cfg.owner&&location.host.endsWith('.github.io')){
     const m=location.pathname.match(/^\/([^\/]+)/);
-    if(m){cfg={owner:location.host.split('.')[0],repo:m[1],pat:cfg.pat||'',branch:cfg.branch||''}}
+    if(m){cfg={owner:location.host.split('.')[0],repo:m[1],pat:cfg.pat||'',branch:cfg.branch||'',meId:cfg.meId}}
   }
   try{
     const c=JSON.parse(localStorage.getItem(LS_DATA)||'null');
-    if(c&&c.version===2&&c.plots&&c.plots.length){data=c;hadLocalData=(data.plots||[]).some(p=>p.ripenAt)}
+    if(c&&c.plots&&c.plots.length){data=migrate(c);hadLocalData=(data.plots||[]).some(p=>p.ripenAt)}
   }catch(e){}
   if(!data)data=defaultData();
-  data.settings=Object.assign({remindMinutes:15,notifyOnRipe:true,channels:{serverchan:true,wecom:true,pushplus:false}},data.settings||{});
+  data=migrate(data);
+  if(!cfg.meId||!memberOf(cfg.meId))cfg.meId=(data.members[0]||{}).id;
   renderAll();
+  if(joinOwner){openJoinSheet();return}
   if(connected())refresh(true);
+  if(cfg.widget)enterWidget(true);
 })();
 </script>
 </body>
