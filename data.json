@@ -1077,11 +1077,11 @@
     {
       "id": "m1_8c1",
       "name": "8-1",
-      "fruit": "香蕉",
+      "fruit": "菠萝",
       "fertilizer": "变异化肥",
       "note": "",
       "plantedAt": 1788426885766,
-      "ripenAt": 1788427665766,
+      "ripenAt": 1788430500385,
       "harvestCount": 2,
       "lastHarvestAt": 1788426885766,
       "owner": "m1",
@@ -1227,7 +1227,7 @@
       "lastDur": 60
     }
   ],
-  "_sha": "f5573f284bb6db3119a5c7ed02688b2b7e669024",
+  "_sha": "0d697e6d52e03811bbc8b36447a3d8a9b73a5bbd",
   "island": {
     "name": "我们的菠萝岛"
   },
