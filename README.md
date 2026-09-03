@@ -67,6 +67,8 @@ git remote add origin https://github.com/<你的用户名>/boluo-island.git
 git push -u origin main
 ```
 
+> ⚠️ 推送时弹出的登录窗口走浏览器授权（Git Credential Manager）即可。**不要**把令牌拼进 URL（`https://令牌@github.com/...`）——那会被明文存进 `.git/config`，克隆目录泄露时就等于令牌泄露。
+
 ### 2. 开启 GitHub Pages
 
 仓库 **Settings → Pages** → Source 选 **Deploy from a branch** → 分支 `main`、目录 `/(root)` → Save。
@@ -149,11 +151,13 @@ GitHub → 头像 → **Settings → Developer settings → Personal access toke
 ### 🔔 提醒（两层）
 
 - **岛屿广播**（设置 → 「岛屿广播」）：全岛所有地块统一推到仓库 Secrets 配置的渠道，可设提前 N 分钟和「成熟时刻再推一次」
+
 - **我的提醒**（设置 → 「我的提醒」）：每人可填自己的 Server酱 SendKey，范围选「只提醒自己 / 全岛提醒 / 不提醒」，提前分钟数各自独立
 
 ### 📱 PWA + 挂件模式
 
 - **装到桌面**：安卓 Chrome 点设置里的「安装菠萝岛 App」；iPhone 用 Safari「分享 → 添加到主屏幕」。安装后离线也能看缓存数据
+
 - **挂件模式**：首页右上角 🐱 按钮切换，大字倒计时 + 猫咪形象，适合挂在旧手机上当专属倒计时屏幕
 
 - 批量模式下点「清空」可一次收获多块地
