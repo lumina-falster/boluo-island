@@ -59,6 +59,32 @@ header{position:sticky;top:0;z-index:20;color:#fff;padding:calc(10px + env(safe-
   font-weight:600;color:#6b6455;box-shadow:var(--shadow)}
 .tbtn:active{filter:brightness(.95)}
 .tbtn.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.tbtn:disabled{opacity:.45}
+
+/* ---------- 成员切换条 ---------- */
+.mtabs{display:flex;gap:7px;overflow-x:auto;padding:12px 14px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.mtabs::-webkit-scrollbar{display:none}
+.mtab{flex:none;display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:999px;background:#fff;
+  border:1.5px solid #e3dcc7;font-size:13px;font-weight:600;color:#6b6455;box-shadow:var(--shadow);position:relative}
+.mtab:active{filter:brightness(.95)}
+.mtab.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.mtab .bdg{min-width:17px;height:17px;border-radius:999px;background:var(--red);color:#fff;font-size:10px;
+  font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.mtab.locked{font-size:12px}
+.mtab.mine::after{content:'我';position:absolute;top:-6px;right:-4px;background:var(--acc);color:#fff;
+  font-size:9px;font-weight:800;border-radius:999px;padding:1px 5px}
+
+/* ---------- 全岛总览卡片 ---------- */
+.mcards{padding:12px 14px 0;display:flex;flex-direction:column;gap:10px}
+.mcard{background:var(--card);border-radius:var(--radius);border:1.5px solid var(--line);padding:12px 14px;
+  box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column;gap:8px}
+.mcard:active{filter:brightness(.97)}
+.mc-head{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700}
+.mc-head .hint{font-weight:400}
+.mc-counts{display:flex;gap:6px;flex-wrap:wrap}
+.mc-next{font-size:13px;color:#6b6455;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.mc-next b{font-variant-numeric:tabular-nums;color:var(--acc-deep)}
+.mc-next .nm{color:var(--ink);font-weight:600}
 .tipbar{margin:8px 14px 0;font-size:12px;color:#8a6d1f;background:#fff6e0;border:1px solid #f3dfae;
   border-radius:10px;padding:7px 12px;display:none;line-height:1.6}
 .tipbar.show{display:block}
@@ -203,6 +229,8 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
     <div class="next" id="nextLine"></div>
   </div>
 
+  <div class="mtabs hidden" id="memberTabs"></div>
+
   <div class="toolbar">
     <button class="tbtn" id="btnBatch">批量种植</button>
     <button class="tbtn" id="btnLog">📖 记录本</button>
@@ -240,7 +268,6 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
   <div class="frow" id="nameRow"><div class="flabel">地块名称（可改成游戏里的位置叫法）</div><input type="text" id="inName" maxlength="12"></div>
   <div class="frow"><div class="flabel">果实</div><div class="chips" id="fruitChips"></div><input type="text" id="inFruit" class="hidden" placeholder="输入果实名称" maxlength="10"></div>
   <div class="frow"><div class="flabel">肥料（部分肥料会影响成熟时间）</div><div class="chips" id="fertChips"></div><input type="text" id="inFert" class="hidden" placeholder="输入肥料名称" maxlength="12"></div>
-  <div class="frow hidden" id="ownerRow"><div class="flabel">记录人（这块地是谁种的）</div><div class="chips" id="ownerChips"></div></div>
   <div class="tabs">
     <button class="tab on" id="tabRemain">按剩余时间</button>
     <button class="tab" id="tabFresh">刚种下</button>
@@ -418,7 +445,8 @@ const SCOPES=['只提醒自己','全岛提醒','不提醒'];
 const LS_CFG='boluo_cfg',LS_DATA='boluo_data';
 let cfg={};try{cfg=JSON.parse(localStorage.getItem(LS_CFG)||'{}')}catch(e){cfg={}}
 let data=null;
-let viewId=null,editIds=[],timeMode='remain',selFruit=null,selFert=null,selOwner=null;
+let viewId=null,editIds=[],timeMode='remain',selFruit=null,selFert=null;
+let viewMember=null;   // null=跟随我的身份 | 'all'=全岛总览 | 成员id
 let batchMode=false,dragSel=null;
 let hvTarget=null,selRes=null,myScope='全岛提醒';
 let joinOwner=null,joinRepo=null,joinEmoji='🐱';
@@ -433,6 +461,10 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const byId=id=>(data.plots||[]).find(p=>p.id===id);
 const memberOf=id=>(data.members||[]).find(m=>m.id===id);
 const me=()=>memberOf(cfg.meId)||(data.members||[])[0]||null;
+const myId=()=>{const m=me();return m?m.id:'m1'};
+const curView=()=>viewMember||myId();
+const viewPlots=()=>viewMember==='all'?(data.plots||[]):(data.plots||[]).filter(p=>p.owner===curView());
+const canEditNow=()=>viewMember!=='all'&&curView()===myId();
 function connected(){return !!(cfg.owner&&cfg.repo)}
 function toast(msg,err){const t=$('#toast');t.textContent=msg;t.className='show'+(err?' err':'');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.className='',2600)}
 function b64enc(str){const bytes=new TextEncoder().encode(str);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
@@ -455,18 +487,19 @@ function fmtCompact(ms){
 }
 function emojiOf(f){return EMOJI[f]||(f?'🌱':'')}
 function toLocalInput(ms){const d=new Date(ms);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)}
-function memberColor(id){let h=0;for(const c of String(id))h=(h*31+c.charCodeAt(0))%360;return 'hsl('+h+',62%,42%)'}
-function ownerBadge(id){const m=memberOf(id);if(!m)return '';return '<i class="ow" style="color:'+memberColor(m.id)+'">'+esc(m.name.slice(0,1))+'</i>'}
 
-/* ================= 数据模型 v3 与迁移 ================= */
-function emptyPlot(id,name){return{id,name,fruit:'',fertilizer:'无',note:'',plantedAt:null,ripenAt:null,owner:'',
+/* ================= 数据模型 v4 与迁移（每人一块 8×8） ================= */
+function emptyPlot(id,name,owner){return{id,name,fruit:'',fertilizer:'无',note:'',plantedAt:null,ripenAt:null,owner:owner||'',
   notified:{soon:[],ripe:[]},harvestCount:0,lastHarvestAt:null,lastFruit:'',lastFert:'',lastDur:null}}
-function defaultData(){
+function plotsForMember(mid){
   const plots=[];
-  for(let r=1;r<=ROWS;r++)for(let c=1;c<=COLS;c++)plots.push(emptyPlot('g'+r+'c'+c,r+'-'+c));
-  return{version:3,island:{name:'我们的菠萝岛'},
+  for(let r=1;r<=ROWS;r++)for(let c=1;c<=COLS;c++)plots.push(emptyPlot(mid+'_'+r+'c'+c,r+'-'+c,mid));
+  return plots;
+}
+function defaultData(){
+  return{version:4,island:{name:'我们的菠萝岛'},
     settings:{remindMinutes:15,notifyOnRipe:true,channels:{serverchan:true,wecom:true,pushplus:false}},
-    members:[{id:'m1',name:'岛主',emoji:'👑',notify:'全岛提醒',nk:'',remindMinutes:15}],plots,history:[]};
+    members:[{id:'m1',name:'岛主',emoji:'👑',notify:'全岛提醒',nk:'',remindMinutes:15}],plots:plotsForMember('m1'),history:[]};
 }
 function migrate(d){
   if(!d||!Array.isArray(d.plots))d=defaultData();
@@ -478,6 +511,7 @@ function migrate(d){
   }
   d.members=d.members.map(m=>({id:m.id||'m1',name:m.name||'岛友',emoji:m.emoji||'🐱',
     notify:m.notify||'全岛提醒',nk:m.nk||'',remindMinutes:m.remindMinutes==null?d.settings.remindMinutes:m.remindMinutes}));
+  const memberIds=new Set(d.members.map(m=>m.id));
   d.plots=d.plots.map(p=>{
     const n=p.notified;
     if(!(n&&Array.isArray(n.soon)&&Array.isArray(n.ripe))){
@@ -493,7 +527,30 @@ function migrate(d){
     return p;
   });
   if(!Array.isArray(d.history))d.history=[];
-  d.version=3;
+  /* ---- v3→v4：每人一块 8×8，老地块按主人分流并补全 ---- */
+  if((d.version||3)<4){
+    const byMember=new Map();   // mid -> {named:Map("r-c"->p), extra:[p]}
+    d.plots.forEach(p=>{
+      const mid=(p.owner&&memberIds.has(p.owner))?p.owner:'m1';
+      p.owner=mid;
+      if(!byMember.has(mid))byMember.set(mid,{named:new Map(),extra:[]});
+      const g=byMember.get(mid);
+      if(p.name&&/^\d+-\d+$/.test(p.name)&&!g.named.has(p.name))g.named.set(p.name,p);
+      else g.extra.push(p);
+    });
+    const plots=[];
+    d.members.forEach(m=>{
+      const g=byMember.get(m.id)||{named:new Map(),extra:[]};
+      for(let r=1;r<=ROWS;r++)for(let c=1;c<=COLS;c++){
+        const key=r+'-'+c;
+        const p=g.named.get(key)||g.extra.shift();
+        if(p)plots.push(Object.assign({},p,{id:m.id+'_'+r+'c'+c}));
+        else plots.push(emptyPlot(m.id+'_'+r+'c'+c,key,m.id));
+      }
+    });
+    d.plots=plots;
+  }
+  d.version=4;
   return d;
 }
 function statusOf(p){
@@ -593,7 +650,7 @@ async function refresh(silent){
     data=server;cacheData();lastFetch=Date.now();
     if(!cfg.meId||!memberOf(cfg.meId))cfg.meId=(data.members[0]||{}).id;
     if(hadLocalData&&!(data.plots||[]).some(p=>p.ripenAt)){
-      const localCopy=JSON.parse(localStorage.getItem(LS_DATA)||'null');
+      const localCopy=migrate(JSON.parse(localStorage.getItem(LS_DATA)||'null'));
       if(localCopy&&(localCopy.plots||[]).some(p=>p.ripenAt)&&confirm('检测到本机有未上传的种植数据，是否上传到 GitHub？')){
         const byIdMap=new Map(localCopy.plots.map(p=>[p.id,p]));
         data.plots=data.plots.map(p=>byIdMap.get(p.id)&&byIdMap.get(p.id).ripenAt?byIdMap.get(p.id):p);
@@ -612,7 +669,7 @@ async function refresh(silent){
 }
 
 /* ================= 渲染 ================= */
-function renderAll(){renderHeader();renderBanner();renderGrid();renderSummary();tick()}
+function renderAll(){renderHeader();renderBanner();renderTabs();renderGrid();renderSummary();tick()}
 
 function renderHeader(){
   const el=$('#syncInfo');
@@ -630,14 +687,67 @@ function renderBanner(){
     :'当前为<b>本地模式</b>：数据只存在本机浏览器，<b>无法定时推送提醒</b>。连接 GitHub 仓库后解锁全部功能 →';
   b.onclick=()=>openSheet('sheetSettings');
 }
+
+/* ---- 成员切换条：单成员隐藏，多成员每人一标签 + 全岛总览 ---- */
+function renderTabs(){
+  const box=$('#memberTabs');
+  const ms=data.members||[];
+  if(ms.length<2){box.classList.add('hidden');box.innerHTML='';return}
+  box.classList.remove('hidden');
+  const cv=curView();
+  let html=`<button class="mtab${cv==='all'?' on':''}" data-view="all">🏝 全岛</button>`;
+  ms.forEach(m=>{
+    const st={ripe:0};
+    (data.plots||[]).forEach(p=>{if(p.owner===m.id&&statusOf(p)==='ripe')st.ripe++});
+    html+=`<button class="mtab${cv===m.id?' on':''}${m.id===myId()?' mine':''}" data-view="${esc(m.id)}">`+
+      `${esc(m.emoji)} ${esc(m.name)}${st.ripe?`<span class="bdg">${st.ripe}</span>`:''}</button>`;
+  });
+  box.innerHTML=html;
+  box.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{
+    viewMember=b.dataset.view==='all'?'all':b.dataset.view;
+    setBatch(false);
+    renderAll();
+  });
+}
+
 function renderGrid(){
-  $('#plotGrid').innerHTML=(data.plots||[]).map(p=>
+  if(viewMember==='all'){
+    renderMemberCards();
+    return;
+  }
+  $('#plotGrid').innerHTML=viewPlots().map(p=>
     `<div class="cell" data-id="${p.id}"><div class="ctop"><span class="cl">${esc(p.name)}</span><span class="ce"></span></div><div class="cd">＋</div></div>`
   ).join('');
 }
+function renderMemberCards(){
+  const ms=data.members||[];
+  $('#plotGrid').innerHTML=ms.map(m=>{
+    const plots=(data.plots||[]).filter(p=>p.owner===m.id);
+    const st={empty:0,growing:0,soon:0,ripe:0};
+    plots.forEach(p=>st[statusOf(p)]++);
+    let next=null;plots.forEach(p=>{if(p.ripenAt&&(!next||p.ripenAt<next.ripenAt))next=p});
+    const nextHtml=next
+      ?`<div class="mc-next">下一个：<span class="nm">${emojiOf(next.fruit)} ${esc(next.fruit)} · ${esc(next.name)}</span>`+
+       `<b data-rid="${next.id}"></b>（${fmtAt(next.ripenAt)}）</div>`
+      :'<div class="mc-next" style="color:#b9ab7d">还没有种植 🌱</div>';
+    return `<div class="mcard" data-view="${esc(m.id)}">
+      <div class="mc-head">${esc(m.emoji)} ${esc(m.name)}${m.id===myId()?' <span class="hint">· 我</span>':''}${m.id==='m1'?' <span class="hint">· 岛主</span>':''}</div>
+      <div class="mc-counts">
+        <span class="cnt ripe">熟 <b>${st.ripe}</b></span>
+        <span class="cnt soon">快熟 <b>${st.soon}</b></span>
+        <span class="cnt grow">长 <b>${st.growing}</b></span>
+        <span class="cnt">空 <b>${st.empty}</b></span>
+      </div>${nextHtml}
+    </div>`;
+  }).join('');
+  $('#plotGrid').querySelectorAll('.mcard').forEach(c=>c.onclick=()=>{
+    viewMember=c.dataset.view;
+    renderAll();
+  });
+}
 function renderSummary(){
   const st={empty:0,growing:0,soon:0,ripe:0};
-  (data.plots||[]).forEach(p=>st[statusOf(p)]++);
+  viewPlots().forEach(p=>st[statusOf(p)]++);
   $('#counts').innerHTML=
     `<span class="cnt ripe">已成熟 <b>${st.ripe}</b></span>`+
     `<span class="cnt soon">快熟了 <b>${st.soon}</b></span>`+
@@ -655,8 +765,7 @@ function tick(){
     if(p.ripenAt){
       const left=p.ripenAt-now;
       const fert=p.fertilizer&&p.fertilizer!=='无'?'<i class="fdot"></i>':'';
-      const ow=(data.members||[]).length>1?ownerBadge(p.owner):'';
-      cell.querySelector('.ce').innerHTML=ow+emojiOf(p.fruit)+fert;
+      cell.querySelector('.ce').innerHTML=emojiOf(p.fruit)+fert;
       cell.querySelector('.cd').textContent=left<=0?'熟':fmtCompact(left);
       if(!next||p.ripenAt<next.ripenAt)next=p;
     }else{
@@ -665,15 +774,23 @@ function tick(){
     }
     cell.querySelector('.cl').textContent=(p.note?'✎':'')+p.name;
   });
+  /* 全岛总览：更新每张卡片的下一个成熟倒计时 */
+  document.querySelectorAll('#plotGrid .mcard [data-rid]').forEach(el=>{
+    const p=byId(el.dataset.rid);
+    if(p&&p.ripenAt)el.textContent=p.ripenAt-now<=0?'已成熟，快收！':'剩 '+cdText(p.ripenAt-now);
+  });
+  if(!next)viewPlots().forEach(p=>{if(p.ripenAt&&(!next||p.ripenAt<next.ripenAt))next=p});
+  const multi=(data.members||[]).length>1&&viewMember==='all';
   if(next){
     const left=next.ripenAt-now;
-    const own=(data.members||[]).length>1&&next.owner?memberOf(next.owner):null;
+    const own=multi&&next.owner?memberOf(next.owner):null;
     const who=own?('（'+own.emoji+esc(own.name)+'）'):'';
     $('#nextLine').innerHTML=left<=0
       ?`下一个成熟：<b>${esc(next.name)} · ${esc(next.fruit)}</b>${who}<span class="ncd">已成熟，快去收获</span>`
       :`下一个成熟：<b>${esc(next.name)} · ${esc(next.fruit)}</b>${who}（${fmtAt(next.ripenAt)}）<span class="ncd">剩 ${cdText(left)}</span>`;
   }else{
-    $('#nextLine').innerHTML='<span style="color:#b9ab7d">暂无种植中的果实，点空地块或用批量模式开始录入</span>';
+    const who=viewMember==='all'?'全岛':((memberOf(curView())||{}).name||'');
+    $('#nextLine').innerHTML='<span style="color:#b9ab7d">'+(who?who+' ':'')+'暂无种植中的果实'+(canEditNow()?'，点空地块或用批量模式开始录入':'')+'</span>';
   }
   if(viewId&&$('#sheetView').classList.contains('open')){
     const p=byId(viewId);
@@ -786,16 +903,6 @@ function pickFert(v){
   if(v!=='__custom')$('#inFert').value='';
   else setTimeout(()=>$('#inFert').focus(),50);
 }
-function renderOwnerChips(){
-  const box=$('#ownerChips');box.innerHTML='';
-  (data.members||[]).forEach(m=>{
-    const c=document.createElement('button');
-    c.className='chip'+(selOwner===m.id?' on':'');
-    c.textContent=m.emoji+' '+m.name;
-    c.onclick=()=>{selOwner=m.id;renderOwnerChips()};
-    box.appendChild(c);
-  });
-}
 QUICK.forEach(([h,m,label])=>{
   const c=document.createElement('button');
   c.className='chip';c.textContent=label;
@@ -816,8 +923,9 @@ function setTab(m){
   syncDur();
 }
 
-/* ---- 地块录入 sheet（单块/批量通用） ---- */
+/* ---- 地块录入 sheet（单块/批量通用，只能编辑自己的视图） ---- */
 function openPlotSheet(ids){
+  if(!canEditNow()){toast('只能编辑自己的地块，看室友的是只读的 🍃',true);return}
   editIds=ids.slice();
   const batch=ids.length>1;
   const p=byId(ids[0]);
@@ -827,7 +935,6 @@ function openPlotSheet(ids){
     :(p.ripenAt?('编辑 · '+p.name):('在 '+p.name+' 种植'));
   $('#nameRow').classList.toggle('hidden',batch);
   $('#noteRow').classList.toggle('hidden',batch);
-  $('#ownerRow').classList.toggle('hidden',(data.members||[]).length<2);
   $('#inName').value=p.name;
   const srcFruit=(p.ripenAt||!p.lastFruit)?p.fruit:p.lastFruit;
   const srcFert=(p.ripenAt||!p.lastFert||p.lastFert==='')?p.fertilizer:p.lastFert;
@@ -837,8 +944,6 @@ function openPlotSheet(ids){
   selFert=FERTS.includes(srcFert)?srcFert:(srcFert&&srcFert!=='无'?'__custom':'无');
   $('#inFert').value=selFert==='__custom'?srcFert:'';
   renderChips($('#fertChips'),FERTS,selFert,pickFert,$('#inFert'));
-  selOwner=(p.owner&&memberOf(p.owner)&&!batch)?p.owner:(cfg.meId||(data.members[0]||{}).id);
-  renderOwnerChips();
   $('#inRemH').value='';$('#inRemM').value='';
   $('#inDurH').value='';$('#inDurM').value='';
   $('#inPlanted').value=toLocalInput(Date.now());
@@ -876,7 +981,7 @@ $('#btnPlotSave').onclick=()=>{
   const edited=[];
   for(const id of editIds){
     const p=byId(id);if(!p)continue;
-    const upd={fruit,fertilizer:fert||'无',ripenAt,owner:selOwner||cfg.meId,notified:{soon:[],ripe:[]}};
+    const upd={fruit,fertilizer:fert||'无',ripenAt,owner:curView(),notified:{soon:[],ripe:[]}};
     upd.plantedAt=timeMode==='remain'?p.plantedAt:plantedAt;
     if(!batch){
       upd.name=$('#inName').value.trim()||p.name;
@@ -896,7 +1001,10 @@ $('#plotGrid').addEventListener('click',e=>{
   if(batchMode)return;
   const cell=e.target.closest('.cell');if(!cell)return;
   const p=byId(cell.dataset.id);if(!p)return;
-  if(!p.ripenAt){openPlotSheet([p.id]);return}
+  if(!p.ripenAt){
+    if(!canEditNow()){toast('这是'+((memberOf(p.owner)||{}).name||'室友')+'的地块，只读 🍃');return}
+    openPlotSheet([p.id]);return
+  }
   openViewSheet(p.id);
 });
 function openViewSheet(id){
@@ -912,6 +1020,10 @@ function openViewSheet(id){
   const note=$('#vNote');
   if(p.note){note.textContent='备注：'+p.note;note.classList.remove('hidden')}else note.classList.add('hidden');
   $('#vHist').textContent=p.harvestCount?('本地块累计收获 '+p.harvestCount+' 次'):'';
+  const ro=!canEditNow();
+  $('#btnEditInfo').classList.toggle('hidden',ro);
+  $('#btnHarvest').classList.toggle('hidden',ro);
+  $('#btnClearOnly').classList.toggle('hidden',ro);
   tick();
   openSheet('sheetView');
 }
@@ -999,8 +1111,9 @@ $('#btnLog').onclick=()=>{
   openSheet('sheetLog');
 };
 
-/* ---- 批量模式：拖动滑选 ---- */
+/* ---- 批量模式：拖动滑选（仅自己的视图可用） ---- */
 function setBatch(on){
+  if(on&&!canEditNow()){toast('切到自己的地块标签才能批量种植 🍃',true);return}
   batchMode=on;
   $('#btnBatch').classList.toggle('on',on);
   $('#btnBatch').textContent=on?'✓ 退出批量':'批量种植';
@@ -1109,6 +1222,7 @@ $('#btnJoin').onclick=async()=>{
     if(remote.members.some(m=>m.name===name))throw new Error('昵称「'+name+'」已被使用，换一个吧');
     const id='m'+Date.now().toString(36);
     remote.members.push({id,name,emoji:joinEmoji,notify:'全岛提醒',nk:'',remindMinutes:remote.settings.remindMinutes});
+    remote.plots=remote.plots.concat(plotsForMember(id));
     cfg={owner:joinOwner,repo:joinRepo,pat,branch:j1.default_branch||'main',meId:id};
     localStorage.setItem(LS_CFG,JSON.stringify(cfg));
     data=remote;cacheData();
@@ -1176,14 +1290,17 @@ function renderScopeChips(){
 }
 function removeMember(id){
   const m=memberOf(id);if(!m)return;
-  if(!confirm('移除成员 '+m.name+'？其已种地块将变为无主。'))return;
+  if(!confirm('移除成员 '+m.name+'？TA 的 64 块地块和种植记录将一并删除。'))return;
+  const nPlots=(data.plots||[]).filter(p=>p.owner===id).length;
   data.members=data.members.filter(x=>x.id!==id);
-  const edited=[];
-  (data.plots||[]).forEach(p=>{if(p.owner===id){p.owner='';edited.push(p.id)}});
+  const deleted=(data.plots||[]).filter(p=>p.owner===id).map(p=>p.id);
+  data.plots=(data.plots||[]).filter(p=>p.owner!==id);
   if(cfg.meId===id){cfg.meId=(data.members[0]||{}).id;localStorage.setItem(LS_CFG,JSON.stringify(cfg))}
-  saveEdits({members:true,edited});
+  viewMember=(viewMember===id)?null:viewMember;
+  saveEdits({members:true,deleted});
   renderSettings();
-  toast('已移除 '+m.name);
+  renderAll();
+  toast('已移除 '+m.name+'（删除 '+nPlots+' 块地）');
 }
 $('#btnSettings').onclick=()=>{renderSettings();openSheet('sheetSettings')};
 $('#btnConnect').onclick=async()=>{
