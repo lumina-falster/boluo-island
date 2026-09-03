@@ -1,0 +1,16 @@
+{
+  "name": "菠萝岛果实助手",
+  "short_name": "菠萝岛",
+  "description": "逆水寒手游菠萝岛果实成熟倒计时与微信提醒",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f3e8",
+  "theme_color": "#f5a623",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}
