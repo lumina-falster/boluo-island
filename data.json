@@ -13,19 +13,17 @@
     {
       "id": "m1_1c1",
       "name": "1-1",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -34,19 +32,17 @@
     {
       "id": "m1_1c2",
       "name": "1-2",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -55,19 +51,17 @@
     {
       "id": "m1_1c3",
       "name": "1-3",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -76,19 +70,17 @@
     {
       "id": "m1_1c4",
       "name": "1-4",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -97,19 +89,17 @@
     {
       "id": "m1_1c5",
       "name": "1-5",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 4,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -118,19 +108,17 @@
     {
       "id": "m1_1c6",
       "name": "1-6",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 4,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -139,19 +127,17 @@
     {
       "id": "m1_1c7",
       "name": "1-7",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -160,19 +146,17 @@
     {
       "id": "m1_1c8",
       "name": "1-8",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -181,19 +165,17 @@
     {
       "id": "m1_2c1",
       "name": "2-1",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -202,19 +184,17 @@
     {
       "id": "m1_2c2",
       "name": "2-2",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -223,19 +203,17 @@
     {
       "id": "m1_2c3",
       "name": "2-3",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -244,19 +222,17 @@
     {
       "id": "m1_2c4",
       "name": "2-4",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -265,19 +241,17 @@
     {
       "id": "m1_2c5",
       "name": "2-5",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -286,19 +260,17 @@
     {
       "id": "m1_2c6",
       "name": "2-6",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 4,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -307,19 +279,17 @@
     {
       "id": "m1_2c7",
       "name": "2-7",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 4,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -328,19 +298,17 @@
     {
       "id": "m1_2c8",
       "name": "2-8",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -349,19 +317,17 @@
     {
       "id": "m1_3c1",
       "name": "3-1",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -370,19 +336,17 @@
     {
       "id": "m1_3c2",
       "name": "3-2",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -391,19 +355,17 @@
     {
       "id": "m1_3c3",
       "name": "3-3",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -412,19 +374,17 @@
     {
       "id": "m1_3c4",
       "name": "3-4",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -433,19 +393,17 @@
     {
       "id": "m1_3c5",
       "name": "3-5",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 4,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -454,19 +412,17 @@
     {
       "id": "m1_3c6",
       "name": "3-6",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -475,19 +431,17 @@
     {
       "id": "m1_3c7",
       "name": "3-7",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -496,19 +450,17 @@
     {
       "id": "m1_3c8",
       "name": "3-8",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -517,19 +469,17 @@
     {
       "id": "m1_4c1",
       "name": "4-1",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -538,19 +488,17 @@
     {
       "id": "m1_4c2",
       "name": "4-2",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -559,19 +507,17 @@
     {
       "id": "m1_4c3",
       "name": "4-3",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -580,19 +526,17 @@
     {
       "id": "m1_4c4",
       "name": "4-4",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -601,19 +545,17 @@
     {
       "id": "m1_4c5",
       "name": "4-5",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 4,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -622,19 +564,17 @@
     {
       "id": "m1_4c6",
       "name": "4-6",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -643,19 +583,17 @@
     {
       "id": "m1_4c7",
       "name": "4-7",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -664,19 +602,17 @@
     {
       "id": "m1_4c8",
       "name": "4-8",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -685,19 +621,17 @@
     {
       "id": "m1_5c1",
       "name": "5-1",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -706,19 +640,17 @@
     {
       "id": "m1_5c2",
       "name": "5-2",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -727,19 +659,17 @@
     {
       "id": "m1_5c3",
       "name": "5-3",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -748,19 +678,17 @@
     {
       "id": "m1_5c4",
       "name": "5-4",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -769,19 +697,17 @@
     {
       "id": "m1_5c5",
       "name": "5-5",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -790,19 +716,17 @@
     {
       "id": "m1_5c6",
       "name": "5-6",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -811,19 +735,17 @@
     {
       "id": "m1_5c7",
       "name": "5-7",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -832,19 +754,17 @@
     {
       "id": "m1_5c8",
       "name": "5-8",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -853,19 +773,17 @@
     {
       "id": "m1_6c1",
       "name": "6-1",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -874,19 +792,17 @@
     {
       "id": "m1_6c2",
       "name": "6-2",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -895,19 +811,17 @@
     {
       "id": "m1_6c3",
       "name": "6-3",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -916,19 +830,17 @@
     {
       "id": "m1_6c4",
       "name": "6-4",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -937,19 +849,17 @@
     {
       "id": "m1_6c5",
       "name": "6-5",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -958,19 +868,17 @@
     {
       "id": "m1_6c6",
       "name": "6-6",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -979,19 +887,17 @@
     {
       "id": "m1_6c7",
       "name": "6-7",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1000,19 +906,17 @@
     {
       "id": "m1_6c8",
       "name": "6-8",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1021,19 +925,17 @@
     {
       "id": "m1_7c1",
       "name": "7-1",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1042,19 +944,17 @@
     {
       "id": "m1_7c2",
       "name": "7-2",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1063,19 +963,17 @@
     {
       "id": "m1_7c3",
       "name": "7-3",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1084,19 +982,17 @@
     {
       "id": "m1_7c4",
       "name": "7-4",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1105,19 +1001,17 @@
     {
       "id": "m1_7c5",
       "name": "7-5",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1126,19 +1020,17 @@
     {
       "id": "m1_7c6",
       "name": "7-6",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1147,19 +1039,17 @@
     {
       "id": "m1_7c7",
       "name": "7-7",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1168,19 +1058,17 @@
     {
       "id": "m1_7c8",
       "name": "7-8",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1189,19 +1077,17 @@
     {
       "id": "m1_8c1",
       "name": "8-1",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 4,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1210,19 +1096,17 @@
     {
       "id": "m1_8c2",
       "name": "8-2",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1231,19 +1115,17 @@
     {
       "id": "m1_8c3",
       "name": "8-3",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1252,19 +1134,17 @@
     {
       "id": "m1_8c4",
       "name": "8-4",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1273,19 +1153,17 @@
     {
       "id": "m1_8c5",
       "name": "8-5",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1294,19 +1172,17 @@
     {
       "id": "m1_8c6",
       "name": "8-6",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436110367,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1315,19 +1191,17 @@
     {
       "id": "m1_8c7",
       "name": "8-7",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1336,19 +1210,17 @@
     {
       "id": "m1_8c8",
       "name": "8-8",
-      "fruit": "菠萝",
+      "fruit": "牛油果",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788436134098,
-      "ripenAt": 1788439134098,
+      "plantedAt": 1788452521880,
+      "ripenAt": 1788510121880,
       "harvestCount": 3,
       "lastHarvestAt": 1788436104385,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -2571,7 +2443,7 @@
       "lastDur": null
     }
   ],
-  "_sha": "c97cd2b81268138a615a5a559c862c977b1729b1",
+  "_sha": "2bbbbb2996715f04281361c96c1eb3f786faa1cd",
   "island": {
     "name": "我们的菠萝岛"
   },
