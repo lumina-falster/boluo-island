@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "settings": {
     "remindMinutes": 3,
     "notifyOnRipe": true,
@@ -18,10 +18,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g1c2",
@@ -31,10 +37,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g1c3",
@@ -44,10 +56,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g1c4",
@@ -57,10 +75,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g1c5",
@@ -70,10 +94,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g1c6",
@@ -83,10 +113,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g1c7",
@@ -96,10 +132,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g1c8",
@@ -109,10 +151,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g2c1",
@@ -122,10 +170,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g2c2",
@@ -135,10 +189,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g2c3",
@@ -148,10 +208,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g2c4",
@@ -161,10 +227,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g2c5",
@@ -174,10 +246,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g2c6",
@@ -187,10 +265,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g2c7",
@@ -200,10 +284,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g2c8",
@@ -213,10 +303,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g3c1",
@@ -226,10 +322,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g3c2",
@@ -239,10 +341,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g3c3",
@@ -252,10 +360,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g3c4",
@@ -265,10 +379,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g3c5",
@@ -278,10 +398,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g3c6",
@@ -291,10 +417,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g3c7",
@@ -304,10 +436,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g3c8",
@@ -317,10 +455,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g4c1",
@@ -330,10 +474,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g4c2",
@@ -343,10 +493,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g4c3",
@@ -356,10 +512,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g4c4",
@@ -369,10 +531,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g4c5",
@@ -382,10 +550,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g4c6",
@@ -395,10 +569,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g4c7",
@@ -408,10 +588,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g4c8",
@@ -421,10 +607,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g5c1",
@@ -434,10 +626,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g5c2",
@@ -447,10 +645,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g5c3",
@@ -460,10 +664,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g5c4",
@@ -473,10 +683,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g5c5",
@@ -486,10 +702,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g5c6",
@@ -499,10 +721,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g5c7",
@@ -512,10 +740,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g5c8",
@@ -525,10 +759,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g6c1",
@@ -538,10 +778,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g6c2",
@@ -551,10 +797,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g6c3",
@@ -564,10 +816,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g6c4",
@@ -577,10 +835,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g6c5",
@@ -590,10 +854,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g6c6",
@@ -603,10 +873,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g6c7",
@@ -616,10 +892,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g6c8",
@@ -629,10 +911,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g7c1",
@@ -642,10 +930,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g7c2",
@@ -655,10 +949,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g7c3",
@@ -668,10 +968,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g7c4",
@@ -681,10 +987,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g7c5",
@@ -694,10 +1006,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g7c6",
@@ -707,10 +1025,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g7c7",
@@ -720,10 +1044,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g7c8",
@@ -733,10 +1063,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g8c1",
@@ -746,10 +1082,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g8c2",
@@ -759,10 +1101,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g8c3",
@@ -772,10 +1120,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g8c4",
@@ -785,10 +1139,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g8c5",
@@ -798,10 +1158,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g8c6",
@@ -811,10 +1177,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g8c7",
@@ -824,10 +1196,16 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     },
     {
       "id": "g8c8",
@@ -837,11 +1215,31 @@
       "note": "",
       "plantedAt": 1788367570676,
       "ripenAt": 1788422410676,
-      "notifiedSoon": false,
-      "notifiedRipe": false,
       "harvestCount": 0,
-      "lastHarvestAt": null
+      "lastHarvestAt": null,
+      "owner": "m1",
+      "notified": {
+        "soon": [],
+        "ripe": []
+      },
+      "lastFruit": "",
+      "lastFert": "无",
+      "lastDur": null
     }
   ],
-  "_sha": "88b7f56c9a965a8431a534d31aa98e933829e44c"
+  "_sha": "35707d869f8f2bcdb72267e7910619ff589fe38b",
+  "island": {
+    "name": "我们的菠萝岛"
+  },
+  "members": [
+    {
+      "id": "m1",
+      "name": "岛主",
+      "emoji": "👑",
+      "notify": "全岛提醒",
+      "nk": "",
+      "remindMinutes": 3
+    }
+  ],
+  "history": []
 }
