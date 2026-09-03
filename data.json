@@ -1077,23 +1077,21 @@
     {
       "id": "m1_8c1",
       "name": "8-1",
-      "fruit": "牛油果",
-      "fertilizer": "变异化肥",
+      "fruit": "",
+      "fertilizer": "无",
       "note": "",
-      "plantedAt": 1788422911048,
-      "ripenAt": 1788424737762,
-      "harvestCount": 0,
-      "lastHarvestAt": null,
+      "plantedAt": null,
+      "ripenAt": null,
+      "harvestCount": 1,
+      "lastHarvestAt": 1788425301657,
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": [
-          "bc"
-        ]
+        "ripe": []
       },
-      "lastFruit": "",
-      "lastFert": "无",
-      "lastDur": null
+      "lastFruit": "牛油果",
+      "lastFert": "变异化肥",
+      "lastDur": 30
     },
     {
       "id": "m1_8c2",
@@ -1229,7 +1227,7 @@
       "lastDur": null
     }
   ],
-  "_sha": "bda486c52d826797480c5aa655aefb9ac890498c",
+  "_sha": "af7ec2c8647565251fafb0526ec2ce6b44b40e18",
   "island": {
     "name": "我们的菠萝岛"
   },
@@ -1297,6 +1295,15 @@
       "fertilizer": "无",
       "result": "",
       "note": "批量清空"
+    },
+    {
+      "ts": 1788425301657,
+      "member": "m1",
+      "plotName": "8-1",
+      "fruit": "牛油果",
+      "fertilizer": "变异化肥",
+      "result": "普通收获",
+      "note": ""
     }
   ]
 }
