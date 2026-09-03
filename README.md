@@ -67,8 +67,6 @@ git remote add origin https://github.com/<你的用户名>/boluo-island.git
 git push -u origin main
 ```
 
-> ⚠️ 推送时弹出的登录窗口走浏览器授权（Git Credential Manager）即可。**不要**把令牌拼进 URL（`https://令牌@github.com/...`）——那会被明文存进 `.git/config`，克隆目录泄露时就等于令牌泄露。
-
 ### 2. 开启 GitHub Pages
 
 仓库 **Settings → Pages** → Source 选 **Deploy from a branch** → 分支 `main`、目录 `/(root)` → Save。
