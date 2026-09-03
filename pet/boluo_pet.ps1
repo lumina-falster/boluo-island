@@ -193,16 +193,24 @@ $DWindow.FindName('DClose').Add_Click({ $DWindow.Hide() })
 
 # ---------------- 状态 ----------------
 $script:plots = @()
+$script:members = @()
 $script:total = 64
 $script:offline = $false
 $script:booted = $false
 $script:mood = 'sleep'
+
+function Member-Tag($id) {
+    if (-not $id -or $script:members.Count -lt 2) { return '' }
+    $m = $script:members | Where-Object { $_.id -eq $id } | Select-Object -First 1
+    if ($m) { '[{0}]' -f $m.name } else { '' }
+}
 
 # ---------------- 逻辑 ----------------
 function Update-Data {
     try {
         $d = Get-IslandData
         $script:plots = @($d.plots | Where-Object { $_.ripenAt })
+        $script:members = @($d.members)
         $script:total = @($d.plots).Count
         $script:offline = $false
         $now = NowMs
@@ -213,10 +221,11 @@ function Update-Data {
             $st = ''
             if ($left -le 0) { $st = 'ripe' } elseif ($left -le $rm) { $st = 'soon' }
             if ($st -and $script:booted -and $script:seen[$p.id] -ne $st) {
+                $tag = Member-Tag $p.owner
                 if ($st -eq 'ripe') {
-                    Show-Toast '菠萝岛成熟提醒' ('{0} {1} 已成熟，快去收获！' -f $p.name, $p.fruit)
+                    Show-Toast '菠萝岛成熟提醒' ('{0}{1} {2} 已成熟，快去收获！' -f $tag, $p.name, $p.fruit)
                 } else {
-                    Show-Toast '菠萝岛快熟提醒' ('{0} {1} 约 {2} 分钟后成熟' -f $p.name, $p.fruit, [int][math]::Ceiling($left / 60000))
+                    Show-Toast '菠萝岛快熟提醒' ('{0}{1} {2} 约 {3} 分钟后成熟' -f $tag, $p.name, $p.fruit, [int][math]::Ceiling($left / 60000))
                 }
             }
             if ($script:seen[$p.id] -ne $st) { $script:seen[$p.id] = $st; $changed = $true }
@@ -258,14 +267,18 @@ function Update-Tick {
     elseif ($mood -eq 'grow') { $T1.Text = '{0}生长中 {1} 块' -f $off, $grow }
     else { $T1.Text = '岛上空空的…' }
     if ($mood -eq 'sleep') { $T2.Text = '右键打开网页去种植' }
-    elseif ($nxt) { $T2.Text = '{0}·{1} 剩 {2}' -f $nxt.name, $nxt.fruit, (Format-Left ([double]$nxt.ripenAt - $now)) }
+    elseif ($nxt) { $T2.Text = '{0}{1}·{2} 剩 {3}' -f (Member-Tag $nxt.owner), $nxt.name, $nxt.fruit, (Format-Left ([double]$nxt.ripenAt - $now)) }
     else { $T2.Text = '' }
     $PetT.Y = if ($mood -eq 'ripe') { [math]::Sin([DateTime]::Now.TimeOfDay.TotalSeconds * 5) * 3 } else { 0 }
     if ($DWindow.Visibility -eq 'Visible') {
         $lines = @('已熟 {0}   快熟 {1}   生长 {2}   空 {3}' -f $ripe, $soon, $grow, ($script:total - $ripe - $soon - $grow))
+        if ($script:members.Count -gt 1) {
+            $mnames = ($script:members | ForEach-Object { '{0}{1}' -f $_.emoji, $_.name }) -join '  '
+            $lines += ('成员：' + $mnames)
+        }
         $lines += ('─' * 20)
         $ups = $script:plots | Sort-Object { [double]$_.ripenAt } | Select-Object -First 8
-        foreach ($p in $ups) { $lines += '{0,-5} {1,-4} {2}' -f $p.name, $p.fruit, (Format-Left ([double]$p.ripenAt - $now)) }
+        foreach ($p in $ups) { $lines += '{0,-5} {1,-10} {2}' -f $p.name, ((Member-Tag $p.owner) + $p.fruit), (Format-Left ([double]$p.ripenAt - $now)) }
         if (-not $ups) { $lines += '（暂无种植，去手机网页录一块吧）' }
         if ($script:offline) { $lines += '离线中，显示的是上次同步数据' }
         $DText.Text = $lines -join "`n"
@@ -320,9 +333,13 @@ if ($cfg.ContainsKey('left') -and $cfg['left']) {
 if (-not $SelfTest) { Ensure-Shortcut }
 
 if ($SelfTest) {
+    $script:members = @(
+        [pscustomobject]@{ id = 'm1'; name = '岛主'; emoji = '👑' }
+        [pscustomobject]@{ id = 'm2'; name = '小A'; emoji = '🐱' }
+    )
     $script:plots = @(
-        [pscustomobject]@{ id = 'g1c1'; name = '1-1'; fruit = '山竹'; ripenAt = [double](NowMs + 3600000) }
-        [pscustomobject]@{ id = 'g2c3'; name = '2-3'; fruit = '柠檬'; ripenAt = [double](NowMs + 300000) }
+        [pscustomobject]@{ id = 'g1c1'; name = '1-1'; fruit = '山竹'; ripenAt = [double](NowMs + 3600000); owner = 'm1' }
+        [pscustomobject]@{ id = 'g2c3'; name = '2-3'; fruit = '柠檬'; ripenAt = [double](NowMs + 300000); owner = 'm2' }
     )
     $script:total = 64
     $closeT = New-Object System.Windows.Threading.DispatcherTimer
