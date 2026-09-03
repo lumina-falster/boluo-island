@@ -1,5 +1,5 @@
 /* 菠萝岛助手 Service Worker：应用外壳缓存 + data.json 网络优先 */
-const VER = 'boluo-v3.0.0';
+const VER = 'boluo-v4.0.0';
 const SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './pet.png'];
 
 self.addEventListener('install', e => {
