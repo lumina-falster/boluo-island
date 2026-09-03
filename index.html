@@ -248,6 +248,7 @@ footer{margin:16px 16px 0;text-align:center;font-size:11px;color:#b9b09a;line-he
   <span class="bcnt" id="selCount">已选 0 块</span>
   <button class="go" id="btnSelPlant">种植</button>
   <button id="btnSelReplant">♻️ 再种</button>
+  <button id="btnSelAll">全选</button>
   <button class="red" id="btnSelClear">清空</button>
   <button id="btnSelExit">退出</button>
 </div>
@@ -1124,15 +1125,33 @@ function setBatch(on){
     selectedSet.clear();
     document.querySelectorAll('#plotGrid .cell.sel').forEach(c=>c.classList.remove('sel'));
     $('#selCount').textContent='已选 0 块';
+    $('#btnSelAll').textContent='全选';
   }
 }
 $('#btnBatch').onclick=()=>setBatch(!batchMode);
 $('#btnSelExit').onclick=()=>setBatch(false);
+$('#btnSelAll').onclick=()=>{
+  const cells=[...document.querySelectorAll('#plotGrid .cell')];
+  if(!cells.length)return;
+  const allOn=cells.every(c=>selectedSet.has(c.dataset.id));
+  cells.forEach(c=>{
+    if(allOn)selectedSet.delete(c.dataset.id);else selectedSet.add(c.dataset.id);
+    c.classList.toggle('sel',!allOn);
+  });
+  $('#selCount').textContent='已选 '+selectedSet.size+' 块';
+  $('#btnSelAll').textContent=allOn?'全选':'取消全选';
+};
 function applySel(cell){
   const id=cell.dataset.id;
   if(dragSel==='add')selectedSet.add(id);else selectedSet.delete(id);
   cell.classList.toggle('sel',selectedSet.has(id));
   $('#selCount').textContent='已选 '+selectedSet.size+' 块';
+  syncSelAllBtn();
+}
+function syncSelAllBtn(){
+  const cells=[...document.querySelectorAll('#plotGrid .cell')];
+  const allOn=cells.length>0&&cells.every(c=>selectedSet.has(c.dataset.id));
+  $('#btnSelAll').textContent=allOn?'取消全选':'全选';
 }
 $('#plotGrid').addEventListener('pointerdown',e=>{
   if(!batchMode)return;
