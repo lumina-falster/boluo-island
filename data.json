@@ -1175,18 +1175,14 @@
       "fruit": "菠萝",
       "fertilizer": "变异化肥",
       "note": "",
-      "plantedAt": 1788431639631,
-      "ripenAt": 1788435239631,
-      "harvestCount": 2,
-      "lastHarvestAt": 1788431639631,
+      "plantedAt": 1788436110367,
+      "ripenAt": 1788439710367,
+      "harvestCount": 3,
+      "lastHarvestAt": 1788436110367,
       "owner": "m1",
       "notified": {
-        "soon": [
-          "bc"
-        ],
-        "ripe": [
-          "bc"
-        ]
+        "soon": [],
+        "ripe": []
       },
       "lastFruit": "菠萝",
       "lastFert": "变异化肥",
@@ -1231,7 +1227,7 @@
       "lastDur": 60
     }
   ],
-  "_sha": "4d378e88fb0203a5e26f6a30fb45cdcdfb9ce62c",
+  "_sha": "eed292b4e5740bf8f1226f278bfbbecfbd1ef6e8",
   "island": {
     "name": "我们的菠萝岛"
   },
@@ -3027,6 +3023,15 @@
       "fertilizer": "变异化肥",
       "result": "",
       "note": "批量连种"
+    },
+    {
+      "ts": 1788436110367,
+      "member": "m1",
+      "plotName": "8-6",
+      "fruit": "菠萝",
+      "fertilizer": "变异化肥",
+      "result": "普通收获",
+      "note": ""
     }
   ]
 }
