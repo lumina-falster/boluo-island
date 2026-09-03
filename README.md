@@ -8,6 +8,8 @@
 
 - **数据自主**：所有数据存在你自己仓库的 `data.json` 里
 
+- **v3 新增**：多人共岛（最多 6 位室友）· 化肥/收获培育记录 · 再种一茬 · 手机挂件模式 · PWA 可安装
+
 ```
 手机浏览器（GitHub Pages 网页）
    │ ① 种下果实时，照游戏显示录入「剩余时间」+ 肥料
@@ -39,14 +41,18 @@ python deploy.py --token <你的GitHub令牌> --serverchan-key <Server酱SendKey
 
 注册/登录 [github.com](https://github.com) → 右上角 **+** → **New repository** → 名称如 `boluo-island`，选 **Public**（免费额度必需，数据只有果实信息，无隐私）→ Create。
 
-把 4 个核心文件上传到仓库**根目录**（网页上传：仓库页 **Add file → Upload files**，把 `index.html`、`data.json`、`scripts` 文件夹、`.github` 文件夹一起拖进去；或用 git；`deploy.py` 只是本机部署辅助脚本，无需上传）：
+把以下文件上传到仓库（网页上传：仓库页 **Add file → Upload files**，把 `index.html`、`data.json`、`manifest.json`、`sw.js`、两个 `icon-*.png`、`pet.png`、`scripts` 文件夹、`.github` 文件夹一起拖进去；或用 git；`deploy.py` 只是本机部署辅助脚本，无需上传）：
 
 ```
 boluo-island/
-├── index.html                  ← 网页
+├── index.html                  ← 网页（看板+设置+记录本）
 ├── data.json                   ← 数据
+├── manifest.json / sw.js       ← PWA（可安装到手机桌面）
+├── icon-192.png / icon-512.png ← App 图标
+├── pet.png                     ← 网页挂件形象
 ├── scripts/notify.py           ← 提醒脚本
-└── .github/workflows/notify.yml ← 定时任务
+├── .github/workflows/notify.yml ← 定时任务
+└── pet/                        ← Windows 桌宠（可选，本地运行）
 ```
 
 git 方式：
@@ -98,7 +104,7 @@ GitHub → 头像 → **Settings → Developer settings → Personal access toke
 
 ## 二、日常使用
 
-界面是和游戏农场对应的 **8×8 = 64 块地网格**，每格显示位置（行-列）、果实和倒计时，颜色区分状态（绿=生长中 / 橙=即将成熟 / 红=已成熟）。
+界面是和游戏农场对应的 **8×8 = 64 块地网格**，每格显示位置（行-列）、果实和倒计时，颜色区分状态（绿=生长中 / 橙=快熟了 / 红=已成熟），顶部汇总条实时显示各状态块数和最近一块的成熟时间。
 
 **批量种植（推荐）**：
 
@@ -106,7 +112,7 @@ GitHub → 头像 → **Settings → Developer settings → Personal access toke
 2. 手指**拖动滑过**要种的地块即选中（滑过已选地块可取消）
 3. 点底部「种植」→ 选果实、肥料，填剩余时间 → 保存，一次种完一整片
 
-**单块操作**：普通模式下点地块——空地直接录入；已种植的显示详情（倒计时、肥料、备注），可「编辑 / 重新录入」或「已收获，清空地块」。
+**单块操作**：普通模式下点地块——空地直接录入；已种植的显示详情（倒计时、肥料、备注、种树人），可「编辑 / 重新录入」或「🧺 记录收获」。
 
 **三种录入模式**（录入面板顶部切换）：
 
@@ -123,6 +129,28 @@ GitHub → 头像 → **Settings → Developer settings → Personal access toke
 | 15 分钟 | 柠檬、香蕉、石榴、草莓 |
 | 60 分钟 | 杨桃、榴莲       |
 | 16 小时 | 山竹、火龙果、牛油果  |
+
+### 🏝 多人共岛（最多 6 位室友）
+
+设置 → 「岛屿与成员」→ 复制**邀请链接**发给室友。室友打开链接 → 粘贴**岛屿令牌**（岛主按面板里的步骤生成一个只授权本仓库的 PAT）→ 填昵称选形象 → 加入。之后大家看同一块 8×8 看板，每块地显示种树人昵称，录入时选「记录人」；换设备/退出后重新点邀请链接即可恢复身份。岛屿码（`用户名/仓库名`）也可手动在设置里填。
+
+### ⚖️ 化肥与收获记录
+
+录入时选肥料（重量/变异/促熟/无，可自定义）；收获时点「🧺 记录收获」补记结果（如「出了变异彩虹果」）并写备注。每次收获自动归档进「📖 记录本」，可按 果实×肥料 组合对照哪种搭配出变异。
+
+### ♻️ 再种一茬
+
+收获面板勾选「收完按同样参数再种一茬」，一键按上次的果实+肥料+时长重新开始倒计时；批量模式下也有「♻️ 再种」按钮，选中已收获的地块批量重种。
+
+### 🔔 提醒（两层）
+
+- **岛屿广播**（设置 → 「岛屿广播」）：全岛所有地块统一推到仓库 Secrets 配置的渠道，可设提前 N 分钟和「成熟时刻再推一次」
+- **我的提醒**（设置 → 「我的提醒」）：每人可填自己的 Server酱 SendKey，范围选「只提醒自己 / 全岛提醒 / 不提醒」，提前分钟数各自独立
+
+### 📱 PWA + 挂件模式
+
+- **装到桌面**：安卓 Chrome 点设置里的「安装菠萝岛 App」；iPhone 用 Safari「分享 → 添加到主屏幕」。安装后离线也能看缓存数据
+- **挂件模式**：首页右上角 🐱 按钮切换，大字倒计时 + 猫咪形象，适合挂在旧手机上当专属倒计时屏幕
 
 - 批量模式下点「清空」可一次收获多块地
 
@@ -142,11 +170,13 @@ GitHub → 头像 → **Settings → Developer settings → Personal access toke
 
 - **误操作想恢复数据**：`data.json` 每次修改都有 commit 记录，仓库里可查看历史版本还原。
 
+- **个人推送的 SendKey 安全吗**：SendKey 保存在公开仓库的 data.json 里，理论上他人可见（免费版每天限 5 条、可随时在 sct.ftqq.com 重置）。介意就留空，只用岛屿广播；岛屿广播的密钥放在仓库 Secrets，不会公开。
+
 - **为什么是 8×8**：对应菠萝岛农场的 64 块地布局。如果以后游戏改了地块数，改 `index.html` 里的 `ROWS/COLS` 常量和 `data.json` 即可。
 
 ## 四、Windows 桌宠（可选）
 
-`pet/boluo_pet.ps1`：桌面常驻小菠萝宠物，头顶气泡实时显示最近的果实倒计时，快熟/成熟时弹 Windows 通知。PowerShell + WPF 实现，**零依赖**。
+`pet/boluo_pet.ps1`：桌面常驻小猫桌宠（自带 `pet.png` 皮肤，换成任何透明底 PNG 即可换形象），头顶气泡实时显示最近的果实倒计时，快熟/成熟时弹 Windows 通知。多人岛屿会显示 `[昵称]` 标签。PowerShell + WPF 实现，**零依赖**。
 
 - **启动**：双击 `pet/启动桌宠.bat`
 
@@ -156,22 +186,11 @@ GitHub → 头像 → **Settings → Developer settings → Personal access toke
 
 - **数据**：只读，每 3 分钟自动同步仓库 data.json（离线时用上次数据继续倒计时）；增删改仍在手机网页上操作
 
+- **换皮肤**：把任意透明底竖版 PNG 改名为 `pet.png` 放进 `pet/` 文件夹，重启桌宠生效；不想要叠加的表情小脸，在 `pet_config.json` 里加 `"hideFace": true`
+
 - **开机自启**：`Win + R` 输入 `shell:startup` 回车，把 `启动桌宠.bat` 的快捷方式拖进打开的文件夹
 
 - 仓库换了记得右键「设置仓库…」改 owner / repo
-
-- **分享到其他电脑**（桌宠只读公开仓库，对方无需令牌）：
-
-  - 方式一（推荐）：把 `菠萝岛桌宠.zip` 发给对方，解压后双击 `START_PET.bat` 即可，首次运行自动创建桌面快捷方式
-
-  - 方式二：对方 `Win + R` → `powershell`，粘贴运行：
-    `powershell -NoProfile -ExecutionPolicy Bypass -c "irm https://cdn.jsdelivr.net/gh/lumina-falster/boluo-island@main/pet/install.ps1 | iex"`
-
-  - 朋友有自己的岛屿？让他先部署自己的仓库，然后右键桌宠「设置仓库」改成他的用户名/仓库名
-
-- **自定义桌宠形象**：在 pet 文件夹放一张 `pet.png`（透明背景 PNG，建议竖版 ≥570×1020；显示区 76×136 等比缩放，方形图居中缩小），重启即替换菠萝造型，表情小脸保留；图片自带表情想隐藏小脸，在 `pet_config.json` 加 `"hideFace": true`
-
-- **换快捷方式图标**：256×256 的 `.ico` 覆盖 `pet/pineapple.ico` 后重启（PNG 转 ico 可用 icoconvert.com 等在线工具）；桌面快捷方式不刷新就删掉，重启桌宠会自动重建
 
 ## 五、说明
 
