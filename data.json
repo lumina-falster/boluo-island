@@ -1087,7 +1087,9 @@
       "owner": "m1",
       "notified": {
         "soon": [],
-        "ripe": []
+        "ripe": [
+          "bc"
+        ]
       },
       "lastFruit": "",
       "lastFert": "无",
